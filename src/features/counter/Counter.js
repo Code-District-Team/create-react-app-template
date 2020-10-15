@@ -8,6 +8,9 @@ import {
   selectCount,
 } from "./counterSlice";
 import styles from "./Counter.module.css";
+import 'antd/dist/antd.css'
+import { Button } from 'antd';
+
 
 export function Counter() {
   const count = useSelector(selectCount);
@@ -54,6 +57,7 @@ export function Counter() {
         >
           Add Async
         </button>
+        <Button>hey</Button>
       </div>
     </div>
   );
