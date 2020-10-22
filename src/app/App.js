@@ -1,30 +1,22 @@
 import React from "react";
-import Routes from "./routes";
-import { useLocation } from "react-router-dom";
+import { useLocation, Switch } from "react-router-dom";
 import "antd/dist/antd.css";
 import "./App.scss";
-import LoggedInPageLayout from "../layout/loggedInPageLayout";
-import GuestPageLayout from "../layout/guestPageLayout";
-import * as GeneralUtility from "../utilities/generalUtility";
+import routes from "../routes/routes";
+import RouteWithSubRoutes from "../routes/routeWithSubRoutes";
 
 function App() {
-  const pathname = useLocation().pathname;
-  const isGuestPage = GeneralUtility.isGuestPage(pathname);
-  const layout = isGuestPage ? (
-    <GuestPageLayout>
-      <Routes />
-    </GuestPageLayout>
-  ) : (
-    <LoggedInPageLayout>
-      <Routes />
-    </LoggedInPageLayout>
-  );
 
   return (
     <div className="App">
-      {layout}
+      <Switch>
+        {routes.map((route, i) => (
+          <RouteWithSubRoutes key={i} {...route} />
+        ))}
+      </Switch>
     </div>
   );
+  
 }
 
 export default App;

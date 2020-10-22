@@ -10,7 +10,7 @@ export default function baseReducer(action, modelClass, session) {
             break;
 
         case K.Actions.DELETE + '_AND_' +  K.Actions.UPSERT + '_' + modelClass.capitalModelName(): 
-            modelClass.withId(payload.modelRef.id)?.delete();
+            modelClass.withId(payload.modelRef.id).delete();
             modelClass.upsert(payload.modelRef);
             break;
         
@@ -19,7 +19,7 @@ export default function baseReducer(action, modelClass, session) {
             break;
         
         case K.Actions.DELETE + '_' + modelClass.capitalModelName(): 
-            modelClass.withId(payload.id)?.delete();
+            modelClass.withId(payload.id).delete();
             break;
         
         case K.Actions.CREATE + '_' + modelClass.capitalModelName(): 
@@ -31,7 +31,7 @@ export default function baseReducer(action, modelClass, session) {
             break;
 
         case K.Actions.DELETE + '_' + modelClass.capitalModelName() + 'S':
-            payload.ids.map(id => modelClass.withId(id)?.delete());
+            payload.ids.map(id => modelClass.withId(id).delete());
             break;
 
         case K.Actions.DELETE_ALL + '_' + modelClass.capitalModelName() + 'S':
@@ -39,7 +39,9 @@ export default function baseReducer(action, modelClass, session) {
             break;
 
         case K.Actions.SET + '_' + modelClass.capitalModelName() + '_ATTRIBUTE':
-            modelClass.withId(payload.id)?.set(payload.key, payload.value);
+            modelClass.withId(payload.id).set(payload.key, payload.value);
+            break;
+        default:
             break;
     }
 }

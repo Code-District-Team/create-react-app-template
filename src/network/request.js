@@ -7,7 +7,7 @@ export default class Request {
         const token = Cookies.get(K.Cookie.Key.Token);
         const domainPrefix = Cookies.get(K.Cookie.Key.Tenant);
         headers = {
-            ...((defaultHeaderType == K.Network.Header.Type.Json) ? K.Network.Header.Default(token) : K.Network.Header.Authorization(token)),
+            ...((defaultHeaderType === K.Network.Header.Type.Json) ? K.Network.Header.Default(token) : K.Network.Header.Authorization(token)),
             ...headers
         };
         this.url = (isTenant) ? K.Network.URL.TenantURL(domainPrefix) + relativeURL : K.Network.URL.BaseAPI + relativeURL;

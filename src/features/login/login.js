@@ -3,18 +3,25 @@ import "antd/dist/antd.css";
 import { Form, Input, Button, Checkbox } from "antd";
 import User from "../../models/user/user";
 import { useDispatch } from "react-redux";
+import { useHistory, useLocation } from "react-router-dom";
 
 export default function Login() {
 
   const dispatch = useDispatch();
+  const history = useHistory();
+  const location = useLocation();
 
-  const onFinish = (values) => {
-    dispatch(User.login(values.username, values.password));
-    console.log("Success:", values);
+  const onFinish = async (values) => {
+    await dispatch(User.loginCall(values.username, values.password));
+
+    // Logged in.
+    const { from } = location.state || { from: {path: '\dashboard'} };
+    history.replace(from);
+
   };
 
   const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
+    
   };
 
   return (

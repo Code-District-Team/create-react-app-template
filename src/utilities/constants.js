@@ -1,4 +1,3 @@
-
 const K = {
     Network: {
         URL: {
@@ -18,7 +17,7 @@ const K = {
             BaseAPI: 'http://localhost:8080/api',
             Timeout: 1000,
             TenantURL: (domainPrefix = '') => {
-                return 'http://' + domainPrefix + '.' + 'localhost:8080/api'
+                return 'http://' + domainPrefix + '.localhost:8080/api';
             },
             Client: { 
                 BaseHost: 'localhost',
@@ -92,6 +91,11 @@ const K = {
         '/authentication/reset-password',
         '/subscription/plans'
     ],
+
+    Roles: {
+        Admin: 'Admin',
+        User: 'User'
+    } 
     
 };
 

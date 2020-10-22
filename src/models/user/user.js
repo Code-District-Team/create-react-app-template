@@ -4,6 +4,7 @@ import NetworkCall from '../../network/networkCall';
 import Request from '../../network/request';
 import baseReducer from '../baseModel/baseReducer';
 import { upsertModel } from '../baseModel/baseActions';
+import K from '../../utilities/constants';
 
 
 export default class User extends BaseModel {
@@ -17,6 +18,16 @@ export default class User extends BaseModel {
     }
 
     // Selectors
+
+
+    // Helpers
+    static isAuthenticated() {
+        return true;
+    }
+
+    static roles() {
+        return [K.Roles.User];
+    }
     
     
     // Reducer

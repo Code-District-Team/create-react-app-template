@@ -1,41 +1,46 @@
-import React from "react";
+import React, { useState } from "react";
 import { Menu, Layout } from "antd";
+import { Link } from 'react-router-dom';
 import {
+  DesktopOutlined,
+  PieChartOutlined,
+  FileOutlined,
+  TeamOutlined,
   UserOutlined,
-  LaptopOutlined,
-  NotificationOutlined,
 } from "@ant-design/icons";
+import styles from "./layout.module.scss";
+import navigations from './navigations';
 
 export default function Sider() {
   const { Sider } = Layout;
   const { SubMenu } = Menu;
+  const [collapsed, setCollapsed] = useState(false);
+
+  const onCollapse = (collapsed) => {
+    setCollapsed(collapsed);
+  };
 
   return (
-    <Sider width={200} className="site-layout-background">
-      <Menu
-        mode="inline"
-        defaultSelectedKeys={["1"]}
-        defaultOpenKeys={["sub1"]}
-        style={{ height: "100%", borderRight: 0 }}
-      >
-        <SubMenu key="sub1" icon={<UserOutlined />} title="subnav 1">
-          <Menu.Item key="1">option1</Menu.Item>
-          <Menu.Item key="2">option2</Menu.Item>
-          <Menu.Item key="3">option3</Menu.Item>
-          <Menu.Item key="4">option4</Menu.Item>
-        </SubMenu>
-        <SubMenu key="sub2" icon={<LaptopOutlined />} title="subnav 2">
-          <Menu.Item key="5">option5</Menu.Item>
-          <Menu.Item key="6">option6</Menu.Item>
-          <Menu.Item key="7">option7</Menu.Item>
-          <Menu.Item key="8">option8</Menu.Item>
-        </SubMenu>
-        <SubMenu key="sub3" icon={<NotificationOutlined />} title="subnav 3">
-          <Menu.Item key="9">option9</Menu.Item>
-          <Menu.Item key="10">option10</Menu.Item>
-          <Menu.Item key="11">option11</Menu.Item>
-          <Menu.Item key="12">option12</Menu.Item>
-        </SubMenu>
+    <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
+      <div className={styles["logo"]} />
+      <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
+        {navigations.map((navigation, i) => {
+          if ((navigation.children?.length ?? 0) > 0) {
+            return (
+              <SubMenu key={i} icon={<UserOutlined />} title={navigation.name}>
+                {navigation.children.map((subNavigation, j) => (
+                  <Menu.Item key={`${i}_${j}`}><Link to={subNavigation.path}>{subNavigation.name}</Link></Menu.Item>
+                ))};
+              </SubMenu>
+            );
+          } else {
+            return (
+              <Menu.Item key={i} icon={navigation.icon}>
+                <Link to={navigation.path}>{navigation.name}</Link>
+              </Menu.Item>
+            );
+          }
+        })};
       </Menu>
     </Sider>
   );
