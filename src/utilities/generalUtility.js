@@ -7,15 +7,6 @@ export const handleError = (error, dispatch = null) => {
     return null;
 }
 
-export const isGuestPage = (path) => {
-    for(let guestPage of K.GuestPages) {
-        if (guestPage === path) {
-            return true;
-        }
-    }
-    return false;
-}
-
 export const toCamelCaseToSentence = (string) => {
     return string.replace(/([A-Z]+)*([A-Z][a-z])/g, "$1 $2");
 }
@@ -40,4 +31,19 @@ export const isNumberRegex = () => {
 
 export const isDecimalRegex = () => {
     return new RegExp("^\\d+\\.?\\d*$");
+}
+
+export const isRolePresent = (roles, userRoles) => {
+    let hasRole = true;
+    if (roles && roles.length > 0) {
+        let roleFound = false;
+        for (const routeRole of roles ?? []) {
+            if (userRoles.includes(routeRole)) {
+                roleFound = true;
+                break;
+            }
+        }
+        hasRole = roleFound;
+    }
+    return hasRole;
 }

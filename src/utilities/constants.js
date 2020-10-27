@@ -1,3 +1,4 @@
+console.log(process.env.BASE_URL);
 const K = {
     Network: {
         URL: {
@@ -11,6 +12,7 @@ const K = {
             //     BaseHost: 'ninjirosoft.com',
             //     BasePort: '80',
             // },
+
 
             // Development
             Base: 'http://localhost:8080/',
@@ -84,13 +86,6 @@ const K = {
             UserId: 'user_id'
         },
     },
-
-    GuestPages: [
-        '/login',
-        '/authentication/register',
-        '/authentication/reset-password',
-        '/subscription/plans'
-    ],
 
     Roles: {
         Admin: 'Admin',

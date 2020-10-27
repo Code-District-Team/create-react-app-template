@@ -1,6 +1,7 @@
 import React from "react";
 import User from '../models/user/user';
 import { Redirect, Route } from "react-router-dom";
+import { isRolePresent } from '../utilities/generalUtility';
 
 
 export default function RouteWithSubRoutes(route) {
@@ -14,17 +15,7 @@ export default function RouteWithSubRoutes(route) {
             if (!route.authenticated || (route.authenticated && User.isAuthenticated())) {
 
                 // Check roles
-                let hasRole = true;
-                if (route.roles && route.roles.length > 0) {
-                    let roleFound = false;
-                    for (const routeRole of route.roles ?? []) {
-                        if (User.roles().includes(routeRole)) {
-                            roleFound = true;
-                            break;
-                        }
-                    }
-                    hasRole = roleFound;
-                }
+                const hasRole = isRolePresent(route.roles, User.roles());
                 
                 if (hasRole) {
                     const component = <route.component {...props} route={route} ></route.component>;

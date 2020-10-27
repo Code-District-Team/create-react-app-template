@@ -6,12 +6,11 @@ import routes from "../routes/routes";
 import RouteWithSubRoutes from "../routes/routeWithSubRoutes";
 
 function App() {
-
   return (
     <div className="App">
       <Switch>
         {routes.map((route, i) => (
-          <RouteWithSubRoutes key={i} {...route} />
+          <RouteWithSubRoutes key={i} {...route} exact={route.exact ?? false} />
         ))}
       </Switch>
     </div>

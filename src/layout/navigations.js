@@ -17,14 +17,14 @@ import {
 
 const defaultChildren = (basePath) => ([
     {path: basePath, name: 'List'},
-    {path: `${basePath}/store/create`, name: 'Create'}
+    {path: `${basePath}/store/create`, name: 'Create', roles:[K.Roles.Admin]}
 ]);
 
 const navigations = [
       {
         name: "Projects",
         icon: <ProjectOutlined />,
-        roles: [K.Roles.Admin],
+        roles: [],
         children: defaultChildren('/projects'),
       },
       {

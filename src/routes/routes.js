@@ -1,6 +1,7 @@
 import React from 'react';
 import Dashboard from '../features/dashboard/dashboard';
 import Login from '../features/login/login';
+import NotFound from '../features/notFound/notFound';
 import Projects from '../features/projects/projects';
 import Register from '../features/register/register';
 import Unauthorized from '../features/unauthorized/unauthorized';
@@ -18,6 +19,7 @@ import K from '../utilities/constants';
 //   authenticated: false,
 //   roles: [],
 //   children: [],
+//   exact: true,
 //   layout: LoggedInPageLayout
 // },
 
@@ -45,6 +47,7 @@ const routes = [
     component: Projects,
     authenticated: true,
     roles: [K.Roles.Admin],
+    exact: true,
     children: defaultCrudChildren,
     layout: LoggedInPageLayout,
   },
@@ -68,9 +71,16 @@ const routes = [
   {
     path: '/',
     name: "Dashboard",
+    exact:true,
     component: Dashboard,
     authenticated: true,
     layout: LoggedInPageLayout,
+  }, 
+  {
+    path: '*',
+    name: "Not Found",
+    component: NotFound,
+    layout: GuestPageLayout,
   }, 
 ];
 
