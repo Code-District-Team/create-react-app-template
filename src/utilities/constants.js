@@ -15,15 +15,15 @@ const K = {
 
 
             // Development
-            Base: 'http://localhost:8080/',
-            BaseAPI: 'http://localhost:8080/api',
-            Timeout: 1000,
-            TenantURL: (domainPrefix = '') => {
+            Base: process.env.REACT_APP_BASE_URL,
+            BaseAPI: process.env.REACT_APP_BASE_API_URL,
+            Timeout: process.env.REACT_APP_TIMEOUT,
+            Ten3000antURL: (domainPrefix = '') => {
                 return 'http://' + domainPrefix + '.localhost:8080/api';
             },
             Client: { 
-                BaseHost: 'localhost',
-                BasePort: '3000',
+                BaseHost: process.env.REACT_APP_CLIENT_BASE_HOST,
+                BasePort: process.env.REACT_APP_CLIENT_BASE_PORT,
             },
 
             Protocol: 'http',

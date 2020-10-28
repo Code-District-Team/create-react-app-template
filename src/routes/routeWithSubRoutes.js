@@ -10,7 +10,7 @@ export default function RouteWithSubRoutes(route) {
     <Route
         path={route.path}
         render={props => {
-            debugger;
+            // debugger;
             // Check authentication
             if (!route.authenticated || (route.authenticated && User.isAuthenticated())) {
 

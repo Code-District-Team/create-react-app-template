@@ -42,7 +42,7 @@ export default function Sider() {
                 {navigation.children.map((subNavigation, j) => {
                   const navHasRole = isRolePresent(subNavigation.roles, User.roles());
                   return navHasRole ? <Menu.Item key={`${i}_${j}`}><Link to={subNavigation.path}>{subNavigation.name}</Link></Menu.Item> : null;
-                })};
+                })}
               </SubMenu>
             );
           } else {
@@ -52,7 +52,7 @@ export default function Sider() {
               </Menu.Item>
             );
           }
-        })};
+        })}
       </Menu>
     </Sider>
   );
