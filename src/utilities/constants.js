@@ -1,4 +1,3 @@
-console.log(process.env.BASE_URL);
 const K = {
     Network: {
         URL: {
@@ -18,8 +17,8 @@ const K = {
             Base: process.env.REACT_APP_BASE_URL,
             BaseAPI: process.env.REACT_APP_BASE_API_URL,
             Timeout: process.env.REACT_APP_TIMEOUT,
-            Ten3000antURL: (domainPrefix = '') => {
-                return 'http://' + domainPrefix + '.localhost:8080/api';
+            TenantURL: (domainPrefix = '') => {
+                return 'http://' + domainPrefix + process.env.REACT_APP_TENANT_PARTIAL_URL;
             },
             Client: { 
                 BaseHost: process.env.REACT_APP_CLIENT_BASE_HOST,
@@ -83,7 +82,7 @@ const K = {
         Key: {
             Token: 'token',
             Tenant: 'tenant',
-            UserId: 'user_id'
+            User: 'user'
         },
     },
 

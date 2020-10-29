@@ -5,14 +5,20 @@ import Request from '../../network/request';
 import baseReducer from '../baseModel/baseReducer';
 import { upsertModel } from '../baseModel/baseActions';
 import K from '../../utilities/constants';
+import Cookies from 'js-cookie'
 
 
 export default class User extends BaseModel {
 
-    // API call using thunk
+    // API call using thunk.
     static loginCall(email, password) {
         return async (dispatch) => {
             const user = await NetworkCall.fetch(Request.loginUser(email, password));
+            
+            Cookies.set(K.Cookie.Key.Token, user.apiToken, { path: '/', domain: ('.' + K.Network.URL.Client.BaseHost), expires: 365 });
+            //setting tenant in cookie
+            Cookies.set(K.Cookie.Key.Tenant, user.tenant.domainPrefix, { path: '/', domain: ('.' + K.Network.URL.Client.BaseHost), expires: 365 });
+
             dispatch(upsertModel(User, user));
         };
     }
@@ -27,6 +33,11 @@ export default class User extends BaseModel {
 
     static roles() {
         return [K.Roles.User];
+    }
+
+    static currentUser() {
+        const unparsedUser = localStorage.getItem(K.LocalStorage.Key.User);
+        return unparsedUser ? JSON.parse(unparsedUser) : null;
     }
     
     
