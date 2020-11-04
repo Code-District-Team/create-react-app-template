@@ -1,8 +1,7 @@
 import React from "react";
 import User from '../models/user/user';
 import { Redirect, Route } from "react-router-dom";
-import { isRolePresent } from '../utilities/generalUtility';
-
+import { isRolePresent, redirectIfInvalidTenant } from '../utilities/generalUtility';
 
 export default function RouteWithSubRoutes(route) {
 
@@ -10,10 +9,18 @@ export default function RouteWithSubRoutes(route) {
     <Route
         path={route.path}
         render={props => {
-            // debugger;
+            console.log(route)
             // Check authentication
-            if (!route.authenticated || (route.authenticated && User.isAuthenticated())) {
-
+            if (!route.authenticated || (route.authenticated && User.isTokenAvailable())) {
+                console.log("hello")
+                // Check domain prefix
+                redirectIfInvalidTenant()
+                if(route.path === '/login' && User.isTokenAvailable())
+                    return <Redirect to={{
+                            pathname: '/',
+                            state: { from: props.location }
+                        }}
+                    />
                 // Check roles
                 const hasRole = isRolePresent(route.roles, User.roles());
                 
@@ -29,12 +36,11 @@ export default function RouteWithSubRoutes(route) {
                 }
                 
             } else {
-                return <Redirect
-                    to={{
-                        pathname: '/login',
-                        state: { from: props.location }
-                    }}
-                />
+                return <Redirect to={{
+                    pathname: '/login',
+                    state: { from: props.location }
+                }}
+            />
             }
 
             

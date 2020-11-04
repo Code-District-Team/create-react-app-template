@@ -1,5 +1,6 @@
 import { message } from 'antd';
 import K from './constants'
+import Cookies from 'js-cookie'
 
 export const handleError = (error, dispatch = null) => {
     console.error(error);
@@ -46,4 +47,21 @@ export const isRolePresent = (roles, userRoles) => {
         hasRole = roleFound;
     }
     return hasRole;
+}
+
+export const redirectToLogin = () => {
+    if(typeof window !== 'undefined')
+        window.location = window.location.protocol + '//' + K.Network.URL.Client.BaseHost + ':' + K.Network.URL.Client.BasePort + '/authentication/login';
+}
+
+export const redirectIfInvalidTenant = () => {
+    const cookieDomainPrefix = Cookies.get(K.Cookie.Key.Tenant);
+    const hostArray = window.location.hostname.split('.');
+    const urlDomainPrefix = (hostArray.length>0)?hostArray[0]:'';
+    const path = window.location.pathname;
+    if(!cookieDomainPrefix && (urlDomainPrefix==='wwww'||urlDomainPrefix==='localhost'))
+        return false
+    if(cookieDomainPrefix !== urlDomainPrefix){
+        window.location = window.location.protocol + '//' + ((cookieDomainPrefix) ? (cookieDomainPrefix + '.') : '')+ K.Network.URL.Client.BaseHost + ':' + K.Network.URL.Client.BasePort + path;
+    }
 }

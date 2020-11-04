@@ -13,5 +13,4 @@ export default configureStore({
     counter: counterReducer,
   }
   ,middleware:(getDefaultMiddleware)=>getDefaultMiddleware().concat(logger)
-
 });

@@ -16,7 +16,6 @@ export default class User extends BaseModel {
             const user = await NetworkCall.fetch(Request.loginUser(email, password));
             
             Cookies.set(K.Cookie.Key.Token, user.apiToken, { path: '/', domain: ('.' + K.Network.URL.Client.BaseHost), expires: 365 });
-            //setting tenant in cookie
             Cookies.set(K.Cookie.Key.Tenant, user.tenant.domainPrefix, { path: '/', domain: ('.' + K.Network.URL.Client.BaseHost), expires: 365 });
 
             dispatch(upsertModel(User, user));
@@ -27,8 +26,8 @@ export default class User extends BaseModel {
 
 
     // Helpers
-    static isAuthenticated() {
-        return true;
+    static isTokenAvailable() {
+        return Cookies.get(K.Cookie.Key.Token) ? true : false;
     }
 
     static roles() {

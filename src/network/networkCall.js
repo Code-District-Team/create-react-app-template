@@ -1,6 +1,8 @@
+import React from 'react';
 import axios from 'axios';
 import K from '../utilities/constants';
 import { message } from 'antd';
+import { redirectToLogin } from "../utilities/generalUtility";
 
 export default class NetworkCall {
 
@@ -17,6 +19,9 @@ export default class NetworkCall {
             });
             return response.data;
         } catch(error) {
+            if (error.status === K.Network.StatusCode.Unauthorized) {
+                redirectToLogin();
+            }
             console.log(error.message);
             message.error("Some error occured!")
             return Promise.reject({
