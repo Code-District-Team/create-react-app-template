@@ -8,7 +8,6 @@ import {
   selectCount,
 } from "./counterSlice";
 import styles from "./Counter.module.css";
-import 'antd/dist/antd.css'
 import { Button } from 'antd';
 
 

@@ -29,4 +29,19 @@ export default class Request {
         }
         return new Request(K.Network.URL.LoginUser, K.Network.Method.POST, body, K.Network.Header.Type.Json, {}, false);
     }
+    
+    static forgotPassword(email) {
+        const body = {
+            email
+        }
+        return new Request(K.Network.URL.ForgotPassword, K.Network.Method.POST, body, K.Network.Header.Type.Json, {}, false);
+    }
+
+    static resetPassword(password, token) {
+        const body = {
+            password,
+            token
+        }
+        return new Request(K.Network.URL.ResetPassword, K.Network.Method.POST, body, K.Network.Header.Type.Json, {}, false);
+    }
 }

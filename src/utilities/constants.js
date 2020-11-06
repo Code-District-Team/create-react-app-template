@@ -32,6 +32,12 @@ const K = {
 
             // Assignment
             LoginUser: '/user/login',
+
+            // Forget password
+            ForgotPassword: '/user/send_password_reset_token',
+
+            //Reset password
+            ResetPassword : '/user/reset_password'
         },
         Method: {
             GET: 'GET',

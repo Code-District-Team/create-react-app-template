@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Menu, Layout } from "antd";
 import { Link } from 'react-router-dom';
 import {
@@ -8,27 +8,24 @@ import {
   TeamOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import styles from "./layout.module.scss";
+//import styles from "./layout.module.scss";
 import navigations from './navigations';
 import { isRolePresent } from '../utilities/generalUtility';
 import User from "../models/user/user";
 
-export default function Sider() {
+export default function Sider({ collapsed }) {
 
   // get current user's role
 
   const { Sider } = Layout;
   const { SubMenu } = Menu;
-  const [collapsed, setCollapsed] = useState(false);
-
-  const onCollapse = (collapsed) => {
-    setCollapsed(collapsed);
-  };
 
   return (
-    <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
-      <div className={styles["logo"]} />
-      <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
+    <Sider trigger={null} collapsible collapsed={collapsed}>
+      <div className="ant-layout-sider-logo">
+        <img src="images/logo.png" alt="" />
+      </div>
+      <Menu defaultSelectedKeys={["1"]} mode="inline">
         {navigations.map((navigation, i) => {
           const hasRole = isRolePresent(navigation.roles, User.roles());
           

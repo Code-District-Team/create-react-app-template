@@ -1,6 +1,8 @@
 import React from 'react';
 import Dashboard from '../features/dashboard/dashboard';
 import Login from '../features/login/login';
+import ForgotPassword from '../features/forgotPassword/forgotPassword';
+import SetPassword from '../features/setPassword/setPassword';
 import NotFound from '../features/notFound/notFound';
 import Projects from '../features/projects/projects';
 import Register from '../features/register/register';
@@ -40,7 +42,19 @@ const routes = [
     name: "Register",
     component: Register,
     layout: GuestPageLayout,
-  }, 
+  },
+  {
+    path: '/forgot-password',
+    name: "ForgotPassword",
+    component: ForgotPassword,
+    layout: GuestPageLayout,
+  },
+  {
+    path: '/set-password',
+    name: "SetPassword",
+    component: SetPassword,
+    layout: GuestPageLayout,
+  },
   {
     path: '/projects',
     name: "Projects",

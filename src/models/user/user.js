@@ -6,19 +6,41 @@ import baseReducer from '../baseModel/baseReducer';
 import { upsertModel } from '../baseModel/baseActions';
 import K from '../../utilities/constants';
 import Cookies from 'js-cookie'
+import { redirectToLogin } from '../../utilities/generalUtility'
 
 
 export default class User extends BaseModel {
 
     // API call using thunk.
-    static loginCall(email, password) {
+    static loginCall(email, password, remember) {
         return async (dispatch) => {
             const user = await NetworkCall.fetch(Request.loginUser(email, password));
             
-            Cookies.set(K.Cookie.Key.Token, user.apiToken, { path: '/', domain: ('.' + K.Network.URL.Client.BaseHost), expires: 365 });
-            Cookies.set(K.Cookie.Key.Tenant, user.tenant.domainPrefix, { path: '/', domain: ('.' + K.Network.URL.Client.BaseHost), expires: 365 });
+            Cookies.set(K.Cookie.Key.Token, user.apiToken, { path: '/', domain: ('.' + K.Network.URL.Client.BaseHost), expires: remember?365:'' });
+            Cookies.set(K.Cookie.Key.Tenant, user.tenant.domainPrefix, { path: '/', domain: ('.' + K.Network.URL.Client.BaseHost), expires: remember?365:''});
 
             dispatch(upsertModel(User, user));
+            return user
+        };
+    }
+
+    //Forgot password
+    static async forgotPassword(email) {
+        const user = await NetworkCall.fetch(Request.forgotPassword(email));
+        console.log("User: ", user);
+        return user
+    }
+
+    //Reset password
+    static resetPassword(email, token, remember) {
+        return async (dispatch) => {
+            const user = await NetworkCall.fetch(Request.resetPassword(email, token));
+
+            Cookies.set(K.Cookie.Key.Token, user.apiToken, { path: '/', domain: ('.' + K.Network.URL.Client.BaseHost), expires: remember?365:'' });
+            Cookies.set(K.Cookie.Key.Tenant, user.tenant.domainPrefix, { path: '/', domain: ('.' + K.Network.URL.Client.BaseHost), expires: remember?365:''});
+
+            dispatch(upsertModel(User, user));
+            return user
         };
     }
 
@@ -39,6 +61,11 @@ export default class User extends BaseModel {
         return unparsedUser ? JSON.parse(unparsedUser) : null;
     }
     
+    static logout(){
+        Cookies.remove(K.Cookie.Key.Tenant, { path: '/', domain: ('.' + K.Network.URL.Client.BaseHost)});
+        Cookies.remove(K.Cookie.Key.Token, { path: '/', domain: ('.' + K.Network.URL.Client.BaseHost)});
+        redirectToLogin()
+    }
     
     // Reducer
     static reducer(action, User, session) {

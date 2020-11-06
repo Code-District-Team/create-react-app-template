@@ -1,6 +1,5 @@
 import React from "react";
 import { useLocation, Switch } from "react-router-dom";
-import "antd/dist/antd.css";
 import "./App.less";
 import routes from "../routes/routes";
 import RouteWithSubRoutes from "../routes/routeWithSubRoutes";

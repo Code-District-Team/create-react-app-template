@@ -3,30 +3,33 @@ import axios from "axios";
 import K from "../utilities/constants";
 import { message } from "antd";
 import { redirectToLogin } from "../utilities/generalUtility";
+import { trackPromise } from "react-promise-tracker";
 
 export default class NetworkCall {
   static async fetch(request) {
     try {
-      const response = await NetworkCall.axios({
+        const response = await trackPromise(NetworkCall.axios({
         method: request.method,
         url: request.url,
         data: request.body,
         headers: request.headers,
         validateStatus: (status) => {
-          return (status >= 200 && status < 300) || status == 304;
+          return (status >= 200 && status < 300) || status === 304;
         },
-      });
+      }));
+      console.log("data", response.data);
       return response.data;
-    } catch (error) {
+    } catch (err) {
+      let error = err.response;
+      console.log("Error", error);
+      message.error(error.data.message);
       if (error.status === K.Network.StatusCode.Unauthorized) {
         redirectToLogin();
       }
-      console.log(error.message);
-      message.error("Some error occured!");
       return Promise.reject({
         error: error,
-        message: K.Network.Default.Error,
-        statusCode: 400,
+        message: error.data.message,
+        statusCode: error.status,
       });
     }
   }
