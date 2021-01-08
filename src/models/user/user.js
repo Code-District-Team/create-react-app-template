@@ -7,6 +7,7 @@ import { upsertModel } from '../baseModel/baseActions';
 import K from '../../utilities/constants';
 import Cookies from 'js-cookie'
 import { redirectToLogin } from '../../utilities/generalUtility'
+import CryptoJS from 'crypto-js';
 
 
 export default class User extends BaseModel {
@@ -14,14 +15,26 @@ export default class User extends BaseModel {
     // API call using thunk.
     static loginCall(email, password, remember) {
         return async (dispatch) => {
-            const user = await NetworkCall.fetch(Request.loginUser(email, password));
-            
-            Cookies.set(K.Cookie.Key.Token, user.apiToken, { path: '/', domain: ('.' + K.Network.URL.Client.BaseHost), expires: remember?365:'' });
-            Cookies.set(K.Cookie.Key.Tenant, user.tenant.domainPrefix, { path: '/', domain: ('.' + K.Network.URL.Client.BaseHost), expires: remember?365:''});
+        const user = await NetworkCall.fetch(Request.loginUser(email, password));
+        let encryptedUser = CryptoJS.AES.encrypt(JSON.stringify(user), K.Cookie.Key.EncryptionKey);
+        console.log(encryptedUser);
+        Cookies.set(K.Cookie.Key.User, encryptedUser, {
+            path: "/",
+            domain: "." + K.Network.URL.Client.BaseHost,
+            expires: remember ? 365 : "",
+        });
 
-            dispatch(upsertModel(User, user));
-            return user
+        dispatch(upsertModel(User, user));
+        return user;
         };
+    }
+
+    static logoutCall(error = "") {
+        Cookies.remove(K.Cookie.Key.User, {
+        path: "/",
+        domain: "." + K.Network.URL.Client.BaseHost,
+        });
+        redirectToLogin(error);
     }
 
     //Forgot password
@@ -48,23 +61,41 @@ export default class User extends BaseModel {
 
 
     // Helpers
-    static isTokenAvailable() {
-        return Cookies.get(K.Cookie.Key.Token) ? true : false;
+    static getUserObjectFromCookies(){
+        let cookieUser = Cookies.get(K.Cookie.Key.User);
+        let bytes = cookieUser ? CryptoJS.AES.decrypt(cookieUser, "blc_logged_in_user"):"{}";
+        try {
+            let utfBytes = bytes.toString(CryptoJS.enc.Utf8);
+            // console.log("asdasdasdasd", JSON.parse(utfBytes))
+            return JSON.parse(utfBytes);
+        } catch (error) {
+            console.log("error", error);
+            return this.logoutCall("User unauthorized");      
+        }
     }
 
+    static isTokenAvailable() {
+        return this.getUserObjectFromCookies().apiToken ? true : false;
+    }
+
+    static getTenant() {
+        console.log(this.getUserObjectFromCookies().tenant?.domainPrefix ?? null);
+        return this.getUserObjectFromCookies().tenant?.domainPrefix ?? null;
+    }
+
+    static getToken() {
+        return this.getUserObjectFromCookies().apiToken ?? "";
+    }
+
+    static getName() {
+        return this.getUserObjectFromCookies().name ?? "";
+    }
+
+    static getEmail() {
+        return this.getUserObjectFromCookies().email ?? "";
+    }
     static roles() {
         return [K.Roles.User];
-    }
-
-    static currentUser() {
-        const unparsedUser = localStorage.getItem(K.LocalStorage.Key.User);
-        return unparsedUser ? JSON.parse(unparsedUser) : null;
-    }
-    
-    static logout(){
-        Cookies.remove(K.Cookie.Key.Tenant, { path: '/', domain: ('.' + K.Network.URL.Client.BaseHost)});
-        Cookies.remove(K.Cookie.Key.Token, { path: '/', domain: ('.' + K.Network.URL.Client.BaseHost)});
-        redirectToLogin()
     }
     
     // Reducer

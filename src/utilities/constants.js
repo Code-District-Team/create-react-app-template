@@ -16,6 +16,7 @@ const K = {
             // Development
             Base: process.env.REACT_APP_BASE_URL,
             BaseAPI: process.env.REACT_APP_BASE_API_URL,
+            DomainName: process.env.REACT_APP_CLIENT_DOMAIN_NAME,
             Timeout: process.env.REACT_APP_TIMEOUT,
             TenantURL: (domainPrefix = '') => {
                 return 'http://' + domainPrefix + process.env.REACT_APP_TENANT_PARTIAL_URL;
@@ -86,11 +87,10 @@ const K = {
 
     Cookie: {
         Key: {
-            Token: 'token',
-            Tenant: 'tenant',
-            User: 'user'
+          User: "user",
+          EncryptionKey:"blc_logged_in_user"
         },
-    },
+      },
 
     Roles: {
         Admin: 'Admin',
