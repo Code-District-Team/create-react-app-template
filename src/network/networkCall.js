@@ -7,19 +7,30 @@ import { trackPromise } from "react-promise-tracker";
 import User from "../models/user/user";
 
 export default class NetworkCall {
-  static async fetch(request) {
+  static async fetch(request, useLoading = true) {
     try {
-      const response = await trackPromise(
-        NetworkCall.axios({
-          method: request.method,
-          url: request.url,
-          data: request.body,
-          headers: request.headers,
-          validateStatus: (status) => {
-            return (status >= 200 && status < 300) || status === 304;
-          },
-        })
-      );
+      const response = useLoading 
+        ? await trackPromise(
+            NetworkCall.axios({
+              method: request.method,
+              url: request.url,
+              data: request.body,
+              headers: request.headers,
+              validateStatus: (status) => {
+                return (status >= 200 && status < 300) || status === 304;
+              },
+            })
+          )
+        : await NetworkCall.axios({
+            method: request.method,
+            url: request.url,
+            data: request.body,
+            headers: request.headers,
+            validateStatus: (status) => {
+              return (status >= 200 && status < 300) || status === 304;
+            },
+          });
+
       console.log("NetworkCall Data: ", response.data);
       return response.data;
     } catch (err) {
