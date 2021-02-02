@@ -1,6 +1,8 @@
 import { message } from 'antd';
 import K from './constants'
-import Cookies from 'js-cookie'
+import Cookies from 'js-cookie';
+import history from "./history";
+import User from "../models/user/user";
 
 export const handleError = (error, dispatch = null) => {
     console.error(error);
@@ -49,39 +51,92 @@ export const isRolePresent = (roles, userRoles) => {
     return hasRole;
 }
 
-export const redirectToLogin = () => {
-    if(typeof window !== 'undefined')
-        window.location = window.location.protocol + '//' + K.Network.URL.Client.BaseHost + ':' + K.Network.URL.Client.BasePort + '/login';
-}
+export const redirectToLogin = (error="") => {
+    if (typeof window !== "undefined"){
+      let newUrl = window.location.protocol +
+      "//" +
+      K.Network.URL.Client.BaseHost +
+      ":" +
+      K.Network.URL.Client.BasePort +
+      "/login";
+      if(error !== ""){
+        newUrl += `?err=${error}`
+      }
+      window.location = newUrl;
+    }
+  };
 
 export const redirectIfInvalidTenant = () => {
-    const cookieDomainPrefix = Cookies.get(K.Cookie.Key.Tenant);
-    const hostArray = window.location.hostname.split('.');
-    const urlDomainPrefix = (hostArray.length>0)?hostArray[0]:'';
+    const cookieDomainPrefix = User.getTenant();
+    console.log({ cookieDomainPrefix })
+    const hostArray = window.location.hostname.split(".");
+    const urlDomainPrefix = hostArray.length > 0 ? hostArray[0] : "";
     const path = window.location.pathname;
-    if(!cookieDomainPrefix && (urlDomainPrefix==='www'||urlDomainPrefix==='localhost'))
-        return false;
-    if(cookieDomainPrefix !== urlDomainPrefix){
-        redirectToUrl(cookieDomainPrefix, path)
+    const search = window.location.search;
+    if (
+      !cookieDomainPrefix &&
+      (urlDomainPrefix === "www" || urlDomainPrefix === "localhost" || urlDomainPrefix === K.Network.URL.DomainName)
+    )
+      return false;
+    if (cookieDomainPrefix !== urlDomainPrefix) {
+      redirectToUrl(cookieDomainPrefix, path+search);
     }
-}
+  };
 
 export const redirectToUrl = (domainPrefix, path) => {
-    window.location = window.location.protocol + '//' + ((domainPrefix) ? (domainPrefix + '.') : '')+ K.Network.URL.Client.BaseHost + ':' + K.Network.URL.Client.BasePort + path;
-}
+    window.location =
+      window.location.protocol +
+      "//" +
+      (domainPrefix ? domainPrefix + "." : "") +
+      K.Network.URL.Client.BaseHost +
+      ":" +
+      K.Network.URL.Client.BasePort +
+      path;
+  };
 
 export const setFieldErrorsFromServer = (error, form, values = undefined) => {
+    if(error.error === undefined) return;
     const errors = error.error.data.errors;
-    if (typeof errors === 'string' || errors instanceof String) { return; }
+    if (typeof errors === "string" || errors instanceof String) {
+      return;
+    }
     let fieldErrors = [];
     // debugger;
-    for(let key in errors) {
-        if(errors.hasOwnProperty(key)) {
-            // let fieldError = errors[key].map((error) => {
-            //     return error;
-            // });
-            fieldErrors.push({ name: key, errors: errors[key] , value: (values && values[key]) ? values[key] : undefined });
-        }
+    for (let key in errors) {
+      if (errors.hasOwnProperty(key)) {
+        // let fieldError = errors[key].map((error) => {
+        //     return error;
+        // });
+        fieldErrors.push({
+          name: key,
+          errors: errors[key],
+          value: values && values[key] ? values[key] : undefined,
+        });
+      }
     }
     form.setFields(fieldErrors);
-}
+  };
+
+export const snakeToCamel = (str) => {
+    return str
+      .toLowerCase()
+      .replace(/([-_][a-z])/g, (group) =>
+        group.toUpperCase().replace("-", "").replace("_", "")
+      );
+  };
+  
+export const camelCaseKeys = (obj) =>(
+    Object.keys(obj).reduce((ccObj, field) => ({
+        ...ccObj,
+        [snakeToCamel(field)]: obj[field]
+    }), {})
+)
+
+export const deleteQueryParam = (key) => {
+    const queryParams = new URLSearchParams(window.location.search);
+
+    queryParams.delete(key);
+    history.push({
+        search: queryParams.toString(),
+    });
+};

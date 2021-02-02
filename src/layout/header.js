@@ -26,7 +26,7 @@ export default function Header({ collapsed, toggle }) {
         <a href="">Change Password</a>
       </Menu.Item>
       <Menu.Divider />
-      <Menu.Item key="3" onClick={User.logout}>Logout</Menu.Item>
+      <Menu.Item key="3"  onClick={()=> User.logoutCall()}>Logout</Menu.Item>
     </Menu>
   );
   return (
@@ -43,7 +43,8 @@ export default function Header({ collapsed, toggle }) {
               className="ant-dropdown-link"
               onClick={(e) => e.preventDefault()}
             >
-              <Avatar icon={<UserOutlined />} /> Ted Russell <DownOutlined />
+              <Avatar icon={<UserOutlined />} /> {User.getName()}{" "}
+               <DownOutlined />
             </a>
           </Dropdown>
         </div>
