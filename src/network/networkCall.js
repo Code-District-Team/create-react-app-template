@@ -1,7 +1,7 @@
 import { message } from "antd";
 import axios from "axios";
 import { trackPromise } from "react-promise-tracker";
-import User from "../models/user/user";
+import User from "../redux/models/user/user";
 import K from "../utilities/constants";
 import { camelCaseKeys } from "../utilities/generalUtility";
 

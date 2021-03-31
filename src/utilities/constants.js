@@ -1,18 +1,6 @@
 const K = {
   Network: {
     URL: {
-      // Production
-      // Base: 'http://ninjirosoft.com:8080/',
-      // BaseAPI: 'http://ninjirosoft.com:8080/api',
-      // TenantURL: (domainPrefix = '') => {
-      //     return 'http://' + domainPrefix + '.' + 'ninjirosoft.com:8080/api'
-      // },
-      // Client: {
-      //     BaseHost: 'ninjirosoft.com',
-      //     BasePort: '80',
-      // },
-
-      // Development
       Base: process.env.REACT_APP_BASE_URL,
       BaseAPI: process.env.REACT_APP_BASE_API_URL,
       DomainName: process.env.REACT_APP_CLIENT_DOMAIN_NAME,

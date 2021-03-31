@@ -27,7 +27,6 @@ export default function RouteWithSubRoutes(route) {
             );
           // Check roles
           const hasRole = isRolePresent(route.roles, User.roles());
-
           if (hasRole) {
             const component = <route.component {...props} route={route}></route.component>;
             return route.layout ? <route.layout>{component}</route.layout> : component;

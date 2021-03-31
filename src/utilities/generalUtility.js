@@ -136,3 +136,53 @@ export const deleteQueryParam = (key) => {
     search: queryParams.toString(),
   });
 };
+
+/**
+ *
+ * @param {array} array array to be sorted
+ * @param {string} property property name
+ * @returns {array} sorted array
+ */
+export const sortOnProperty = (array, property) =>
+  array.sort((a, b) => a[property].toLowerCase().localeCompare(b[property].toLowerCase()));
+
+/**
+ * Image not found url
+ */
+export const notFoundImageUrl = `${window.location.origin.toString()}/images/not_found.svg`;
+
+/**
+ *
+ * @param {string} value
+ * @returns {boolean}
+ */
+export const hasSpecialCharacters = (value) => !value.match(/^[-_ ()a-zA-Z0-9]+$/);
+
+/**
+ *
+ * @param {string} value
+ * @returns {string}
+ */
+export const removeMultipleSpaces = (value) => value.replace(/ +(?= )/g, "");
+
+/**
+ *
+ * @param {array} arr array including elements to be swapped
+ * @param {number} from start index
+ * @param {number} to end index
+ * @returns {array} array with swapped elements
+ */
+export const swapPosition = (arr, from, to) => {
+  if (Object.prototype.toString.call(arr) !== "[object Array]") {
+    throw new Error("Please provide a valid array");
+  }
+  // Delete the item from it's current position
+  var item = arr.splice(from, 1);
+  // Make sure there's an item to move
+  if (!item.length) {
+    throw new Error("There is no item in the array at index " + from);
+  }
+  // Move the item to its new position
+  arr.splice(to, 0, item[0]);
+  return arr;
+};

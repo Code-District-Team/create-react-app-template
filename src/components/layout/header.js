@@ -2,11 +2,9 @@ import { DownOutlined, MenuFoldOutlined, MenuUnfoldOutlined, UserOutlined } from
 import { Avatar, Dropdown, Layout, Menu } from "antd";
 import React from "react";
 import { useLocation } from "react-router-dom";
-import User from "../redux/models/user/user";
-import styles from "./layout.module.scss";
+import User from "../../redux/models/user/user";
 
 export default function Header({ collapsed, toggle }) {
-  console.log(styles);
   const { Header } = Layout;
   const location = useLocation();
 
