@@ -1,3 +1,5 @@
+import React from "react";
+import DynamicVirtualList from "../components/common/dynamicVirtualList";
 import GuestPageLayout from "../layout/guestPageLayout";
 import LoggedInPageLayout from "../layout/loggedInPageLayout";
 import Dashboard from "../pages/dashboard/dashboard";
@@ -22,7 +24,6 @@ import K from "../utilities/constants";
 //   exact: true,
 //   layout: LoggedInPageLayout
 // },
-
 const defaultCrudChildren = [
   { path: "/details/:id", name: "Details" },
   { path: "/store/:id", name: "Edit" },
@@ -67,6 +68,7 @@ const routes = [
     path: "/users",
     name: "Users",
     component: Users,
+    exact: true,
     authenticated: true,
     roles: [],
     children: defaultCrudChildren,
@@ -87,6 +89,35 @@ const routes = [
     component: Dashboard,
     authenticated: true,
     layout: LoggedInPageLayout,
+  },
+  {
+    path: "/demo",
+    name: "Demo",
+    exact: true,
+    component: () => (
+      <div>
+        <DynamicVirtualList dataSource={[1, 3, 4, 5]} />
+      </div>
+    ),
+    authenticated: true,
+    roles: [],
+    layout: LoggedInPageLayout,
+    children: [
+      {
+        path: "/1",
+        name: "Demo 1",
+        component: () => <div>YOOO 1</div>,
+        authenticated: true,
+        roles: [],
+      },
+      {
+        path: "/2",
+        name: "Demo 2",
+        component: () => <div>YOOO 2</div>,
+        authenticated: true,
+        roles: [],
+      },
+    ],
   },
   {
     path: "*",

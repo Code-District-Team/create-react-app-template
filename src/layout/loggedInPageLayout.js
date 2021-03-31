@@ -1,5 +1,6 @@
 import { Layout } from "antd";
 import React, { useState } from "react";
+import Breadcrumbs from "../components/layout/breadcrumbs";
 import Footer from "../components/layout/footer";
 import Header from "../components/layout/header";
 import Sider from "../components/layout/sider";
@@ -18,6 +19,7 @@ export default function LoggedInPageLayout({ children }) {
         <Header collapsed={collapsed} toggle={toggle} />
         <Content>
           {/* <Breadcrumbs /> */}
+          <Breadcrumbs />
           {children}
           {/* <Spinner></Spinner> */}
         </Content>

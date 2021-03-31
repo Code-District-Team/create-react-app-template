@@ -1,5 +1,5 @@
-//import 'antd/lib/style/themes/default.less';
-import "antd/dist/antd.css";
+import "antd/dist/antd.less";
+import "antd/lib/style/themes/default.less";
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";

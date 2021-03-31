@@ -4,7 +4,8 @@ import React, { memo, useEffect, useRef, useState } from "react";
 import { useResizeDetector } from "react-resize-detector";
 import { AutoSizer, WindowScroller } from "react-virtualized";
 import { areEqual, VariableSizeList as List } from "react-window";
-import LoadingSpinner from "../loadingSpinner/loadingSpinner";
+import LoadingSpinner from "./loadingSpinner";
+
 const HeightDetector = ({ index, children, onHeightChange }) => {
   const { height, ref } = useResizeDetector();
   useEffect(() => {
