@@ -1,6 +1,5 @@
 import { Layout } from "antd";
 import React from "react";
-import Spinner from "../components/spinner/spinner";
 
 export default function GuestPageLayout({ children }) {
   const { Content } = Layout;
@@ -9,7 +8,7 @@ export default function GuestPageLayout({ children }) {
       <Layout className="guest-layout">
         <Content>
           {children}
-          <Spinner></Spinner>
+          {/* <Spinner></Spinner> */}
         </Content>
       </Layout>
     </React.Fragment>

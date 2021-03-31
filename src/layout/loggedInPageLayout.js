@@ -2,7 +2,6 @@ import { Layout } from "antd";
 import React, { useState } from "react";
 import Footer from "../components/layout/footer";
 import Sider from "../components/layout/sider";
-import Spinner from "../components/spinner/spinner";
 import Header from "../layout/header";
 import styles from "./layout.module.scss";
 
@@ -20,7 +19,7 @@ export default function LoggedInPageLayout({ children }) {
         <Content>
           {/* <Breadcrumbs /> */}
           {children}
-          <Spinner></Spinner>
+          {/* <Spinner></Spinner> */}
         </Content>
         <Footer />
       </Layout>

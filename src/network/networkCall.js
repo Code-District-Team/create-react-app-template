@@ -1,10 +1,9 @@
-import React from "react";
+import { message } from "antd";
 import axios from "axios";
-import K from "../utilities/constants";
-import { message, notification } from "antd";
-import { camelCaseKeys } from "../utilities/generalUtility";
 import { trackPromise } from "react-promise-tracker";
 import User from "../models/user/user";
+import K from "../utilities/constants";
+import { camelCaseKeys } from "../utilities/generalUtility";
 
 export default class NetworkCall {
   static async fetch(request, useLoading = true) {

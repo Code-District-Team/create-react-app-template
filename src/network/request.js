@@ -1,5 +1,5 @@
-import K from "../utilities/constants";
 import Cookies from "js-cookie";
+import K from "../utilities/constants";
 
 export default class Request {
   constructor(
