@@ -1,16 +1,10 @@
 import React from "react";
 import { Layout, Menu, Dropdown, Avatar } from "antd";
-import {
-  DownOutlined,
-  UserOutlined,
-  MenuUnfoldOutlined,
-  MenuFoldOutlined,
-} from "@ant-design/icons";
+import { DownOutlined, UserOutlined, MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
 import { Link, useLocation } from "react-router-dom";
 import routes from "../routes/routes";
 import styles from "./layout.module.scss";
 import User from "../models/user/user";
-
 
 export default function Header({ collapsed, toggle }) {
   console.log(styles);
@@ -26,7 +20,9 @@ export default function Header({ collapsed, toggle }) {
         <a href="">Change Password</a>
       </Menu.Item>
       <Menu.Divider />
-      <Menu.Item key="3"  onClick={()=> User.logoutCall()}>Logout</Menu.Item>
+      <Menu.Item key="3" onClick={() => User.logoutCall()}>
+        Logout
+      </Menu.Item>
     </Menu>
   );
   return (
@@ -38,13 +34,8 @@ export default function Header({ collapsed, toggle }) {
       <div className="app-header-right">
         <div className="loggedin-user-dd">
           <Dropdown overlay={menu} trigger={["click"]}>
-            <a
-              href="#menu"
-              className="ant-dropdown-link"
-              onClick={(e) => e.preventDefault()}
-            >
-              <Avatar icon={<UserOutlined />} /> {User.getName()}{" "}
-               <DownOutlined />
+            <a href="#menu" className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
+              <Avatar icon={<UserOutlined />} /> {User.getName()} <DownOutlined />
             </a>
           </Dropdown>
         </div>

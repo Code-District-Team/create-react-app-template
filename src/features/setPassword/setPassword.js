@@ -4,9 +4,9 @@ import { LockOutlined } from "@ant-design/icons";
 import User from "../../models/user/user";
 import { useDispatch } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
-import { message } from 'antd';
-import { redirectToUrl } from '../../utilities/generalUtility'
-var md5 = require('md5');
+import { message } from "antd";
+import { redirectToUrl } from "../../utilities/generalUtility";
+var md5 = require("md5");
 
 export default function SetPassword() {
   const dispatch = useDispatch();
@@ -14,20 +14,18 @@ export default function SetPassword() {
   const location = useLocation();
 
   const onFinish = async (values) => {
-    if(values.password !== values.confirmPassword){
-      message.error('Password does not match!')
-      return
+    if (values.password !== values.confirmPassword) {
+      message.error("Password does not match!");
+      return;
     }
     let token = location.search.substring(7);
     let encryptedPass = md5(values.password);
 
     try {
       let user = await dispatch(User.resetPassword(encryptedPass, token, values.remember));
-      const { from } = location.state || { from: {path: '/'} };
-      redirectToUrl(user.tenant.domainPrefix, from.path)
-    } catch(error){
-
-    }
+      const { from } = location.state || { from: { path: "/" } };
+      redirectToUrl(user.tenant.domainPrefix, from.path);
+    } catch (error) {}
   };
 
   const onFinishFailed = (errorInfo) => {};
@@ -63,9 +61,7 @@ export default function SetPassword() {
               ]}
             >
               <Input.Password
-                prefix={
-                  <LockOutlined className="site-form-item-icon text-primary" />
-                }
+                prefix={<LockOutlined className="site-form-item-icon text-primary" />}
                 placeholder="Password"
                 size="large"
               />
@@ -80,9 +76,7 @@ export default function SetPassword() {
               ]}
             >
               <Input.Password
-                prefix={
-                  <LockOutlined className="site-form-item-icon text-primary" />
-                }
+                prefix={<LockOutlined className="site-form-item-icon text-primary" />}
                 placeholder="Confirm Password"
                 size="large"
               />

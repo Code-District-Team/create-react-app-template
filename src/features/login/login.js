@@ -4,12 +4,8 @@ import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import User from "../../models/user/user";
 import { useDispatch } from "react-redux";
 import { useLocation, Link } from "react-router-dom";
-import {
-  deleteQueryParam,
-  redirectToUrl,
-  setFieldErrorsFromServer,
-} from "../../utilities/generalUtility";
-import qs from 'qs';
+import { deleteQueryParam, redirectToUrl, setFieldErrorsFromServer } from "../../utilities/generalUtility";
+import qs from "qs";
 var md5 = require("md5");
 
 export default function Login() {
@@ -18,22 +14,20 @@ export default function Login() {
   const [form] = Form.useForm();
   const paramJson = qs.parse(location.search, { ignoreQueryPrefix: true });
 
-  useEffect(()=>{
-    console.log("paramJson: ", paramJson)
-    if(paramJson.err){
-      message.error(paramJson.err)
-      deleteQueryParam("err")
+  useEffect(() => {
+    console.log("paramJson: ", paramJson);
+    if (paramJson.err) {
+      message.error(paramJson.err);
+      deleteQueryParam("err");
     }
-  }, [])
+  }, []);
 
   const onFinish = async (values) => {
     let encryptedPass = md5(values.password);
     try {
-      let user = await dispatch(
-        User.loginCall(values.email, encryptedPass, values.remember)
-      );
+      let user = await dispatch(User.loginCall(values.email, encryptedPass, values.remember));
       // const { from } = location.state || { from: { path: "/" } };
-      redirectToUrl(user.tenant.domainPrefix,"/");
+      redirectToUrl(user.tenant.domainPrefix, "/");
     } catch (error) {
       setFieldErrorsFromServer(error, form, values);
     }
@@ -70,9 +64,7 @@ export default function Login() {
             >
               <Input
                 type="email"
-                prefix={
-                  <UserOutlined className="site-form-item-icon text-primary" />
-                }
+                prefix={<UserOutlined className="site-form-item-icon text-primary" />}
                 placeholder="Email"
                 size="large"
               />
@@ -88,9 +80,7 @@ export default function Login() {
               ]}
             >
               <Input.Password
-                prefix={
-                  <LockOutlined className="site-form-item-icon text-primary" />
-                }
+                prefix={<LockOutlined className="site-form-item-icon text-primary" />}
                 placeholder="Password"
                 size="large"
               />

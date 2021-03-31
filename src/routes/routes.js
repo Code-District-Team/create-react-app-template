@@ -1,17 +1,16 @@
-import React from 'react';
-import Dashboard from '../features/dashboard/dashboard';
-import Login from '../features/login/login';
-import ForgotPassword from '../features/forgotPassword/forgotPassword';
-import SetPassword from '../features/setPassword/setPassword';
-import NotFound from '../features/notFound/notFound';
-import Projects from '../features/projects/projects';
-import Register from '../features/register/register';
-import Unauthorized from '../features/unauthorized/unauthorized';
-import Users from '../features/users/users';
-import GuestPageLayout from '../layout/guestPageLayout';
-import LoggedInPageLayout from '../layout/loggedInPageLayout';
-import K from '../utilities/constants';
-
+import React from "react";
+import Dashboard from "../features/dashboard/dashboard";
+import Login from "../features/login/login";
+import ForgotPassword from "../features/forgotPassword/forgotPassword";
+import SetPassword from "../features/setPassword/setPassword";
+import NotFound from "../features/notFound/notFound";
+import Projects from "../features/projects/projects";
+import Register from "../features/register/register";
+import Unauthorized from "../features/unauthorized/unauthorized";
+import Users from "../features/users/users";
+import GuestPageLayout from "../layout/guestPageLayout";
+import LoggedInPageLayout from "../layout/loggedInPageLayout";
+import K from "../utilities/constants";
 
 // Template for a route
 // {
@@ -26,37 +25,37 @@ import K from '../utilities/constants';
 // },
 
 const defaultCrudChildren = [
-  {path: '/details/:id', name: 'Details'},
-  {path: '/store/:id', name: 'Edit'}
+  { path: "/details/:id", name: "Details" },
+  { path: "/store/:id", name: "Edit" },
 ];
 
 const routes = [
   {
-    path: '/login',
+    path: "/login",
     name: "Login",
     component: Login,
     layout: GuestPageLayout,
-  }, 
+  },
   {
-    path: '/register',
+    path: "/register",
     name: "Register",
     component: Register,
     layout: GuestPageLayout,
   },
   {
-    path: '/forgot-password',
+    path: "/forgot-password",
     name: "ForgotPassword",
     component: ForgotPassword,
     layout: GuestPageLayout,
   },
   {
-    path: '/set-password',
+    path: "/set-password",
     name: "SetPassword",
     component: SetPassword,
     layout: GuestPageLayout,
   },
   {
-    path: '/projects',
+    path: "/projects",
     name: "Projects",
     component: Projects,
     authenticated: true,
@@ -66,7 +65,7 @@ const routes = [
     layout: LoggedInPageLayout,
   },
   {
-    path: '/users',
+    path: "/users",
     name: "Users",
     component: Users,
     authenticated: true,
@@ -75,7 +74,7 @@ const routes = [
     layout: LoggedInPageLayout,
   },
   {
-    path: '/unauthorized',
+    path: "/unauthorized",
     name: "Unauthorized",
     component: Unauthorized,
     authenticated: true,
@@ -83,19 +82,19 @@ const routes = [
     layout: GuestPageLayout,
   },
   {
-    path: '/',
+    path: "/",
     name: "Dashboard",
-    exact:true,
+    exact: true,
     component: Dashboard,
     authenticated: true,
     layout: LoggedInPageLayout,
-  }, 
+  },
   {
-    path: '*',
+    path: "*",
     name: "Not Found",
     component: NotFound,
     layout: GuestPageLayout,
-  }, 
+  },
 ];
 
 export default routes;

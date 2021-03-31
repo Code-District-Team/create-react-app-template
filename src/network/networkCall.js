@@ -9,7 +9,7 @@ import User from "../models/user/user";
 export default class NetworkCall {
   static async fetch(request, useLoading = true) {
     try {
-      const response = useLoading 
+      const response = useLoading
         ? await trackPromise(
             NetworkCall.axios({
               method: request.method,
@@ -42,11 +42,10 @@ export default class NetworkCall {
           error: error,
         });
       } else if (error.status === K.Network.StatusCode.Unauthorized) {
-         User.logoutCall("User unauthorized");
+        User.logoutCall("User unauthorized");
       } else message.error(error.data.message);
 
-      if ("errors" in error.data)
-        error.data.errors = camelCaseKeys(error.data.errors);
+      if ("errors" in error.data) error.data.errors = camelCaseKeys(error.data.errors);
       return Promise.reject({
         error: error,
         message: error.data.message,
