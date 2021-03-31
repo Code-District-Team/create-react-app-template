@@ -1,6 +1,6 @@
-import React from "react";
 import { Layout } from "antd";
-import Spinner from "../common/components/spinner/spinner";
+import React from "react";
+import Spinner from "../components/spinner/spinner";
 
 export default function GuestPageLayout({ children }) {
   const { Content } = Layout;

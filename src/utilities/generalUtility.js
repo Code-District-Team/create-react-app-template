@@ -1,8 +1,7 @@
 import { message } from "antd";
+import User from "../redux/models/user/user";
 import K from "./constants";
-import Cookies from "js-cookie";
 import history from "./history";
-import User from "../models/user/user";
 
 export const handleError = (error, dispatch = null) => {
   console.error(error);

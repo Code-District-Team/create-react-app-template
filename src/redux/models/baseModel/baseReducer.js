@@ -1,4 +1,4 @@
-import K from "../../utilities/constants";
+import K from "../../../utilities/constants";
 
 export default function baseReducer(action, modelClass, session) {
   const { type, payload } = action;

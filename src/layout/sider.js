@@ -1,11 +1,11 @@
+import { UserOutlined } from "@ant-design/icons";
+import { Layout, Menu } from "antd";
 import React from "react";
-import { Menu, Layout } from "antd";
 import { Link } from "react-router-dom";
-import { DesktopOutlined, PieChartOutlined, FileOutlined, TeamOutlined, UserOutlined } from "@ant-design/icons";
+import User from "../redux/models/user/user";
+import { isRolePresent } from "../utilities/generalUtility";
 //import styles from "./layout.module.scss";
 import navigations from "./navigations";
-import { isRolePresent } from "../utilities/generalUtility";
-import User from "../models/user/user";
 
 export default function Sider({ collapsed }) {
   // get current user's role

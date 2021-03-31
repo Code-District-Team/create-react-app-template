@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
-import { Form, Input, Button, Checkbox, Card, message } from "antd";
-import { UserOutlined, LockOutlined } from "@ant-design/icons";
-import User from "../../models/user/user";
-import { useDispatch } from "react-redux";
-import { useLocation, Link } from "react-router-dom";
-import { deleteQueryParam, redirectToUrl, setFieldErrorsFromServer } from "../../utilities/generalUtility";
+import { LockOutlined, UserOutlined } from "@ant-design/icons";
+import { Button, Card, Checkbox, Form, Input, message } from "antd";
 import qs from "qs";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { Link, useLocation } from "react-router-dom";
+import User from "../../redux/models/user/user";
+import { deleteQueryParam, redirectToUrl, setFieldErrorsFromServer } from "../../utilities/generalUtility";
 var md5 = require("md5");
 
 export default function Login() {

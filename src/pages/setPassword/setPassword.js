@@ -1,10 +1,9 @@
-import React from "react";
-import { Form, Input, Button, Checkbox, Card } from "antd";
 import { LockOutlined } from "@ant-design/icons";
-import User from "../../models/user/user";
+import { Button, Card, Checkbox, Form, Input, message } from "antd";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
-import { message } from "antd";
+import User from "../../redux/models/user/user";
 import { redirectToUrl } from "../../utilities/generalUtility";
 var md5 = require("md5");
 

@@ -1,15 +1,14 @@
-import React from "react";
-import Dashboard from "../features/dashboard/dashboard";
-import Login from "../features/login/login";
-import ForgotPassword from "../features/forgotPassword/forgotPassword";
-import SetPassword from "../features/setPassword/setPassword";
-import NotFound from "../features/notFound/notFound";
-import Projects from "../features/projects/projects";
-import Register from "../features/register/register";
-import Unauthorized from "../features/unauthorized/unauthorized";
-import Users from "../features/users/users";
 import GuestPageLayout from "../layout/guestPageLayout";
 import LoggedInPageLayout from "../layout/loggedInPageLayout";
+import Dashboard from "../pages/dashboard/dashboard";
+import ForgotPassword from "../pages/forgotPassword/forgotPassword";
+import Login from "../pages/login/login";
+import NotFound from "../pages/notFound/notFound";
+import Projects from "../pages/projects/projects";
+import Register from "../pages/register/register";
+import SetPassword from "../pages/setPassword/setPassword";
+import Unauthorized from "../pages/unauthorized/unauthorized";
+import Users from "../pages/users/users";
 import K from "../utilities/constants";
 
 // Template for a route

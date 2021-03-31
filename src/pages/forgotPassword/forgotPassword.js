@@ -1,10 +1,9 @@
+import { ArrowLeftOutlined, UserOutlined } from "@ant-design/icons";
+import { Button, Card, Divider, Form, Input, message } from "antd";
 import React from "react";
-import { Form, Input, Button, Card, Divider } from "antd";
-import { UserOutlined, ArrowLeftOutlined } from "@ant-design/icons";
-import User from "../../models/user/user";
 import { useDispatch } from "react-redux";
-import { useHistory, useLocation, Link } from "react-router-dom";
-import { message } from "antd";
+import { Link, useHistory, useLocation } from "react-router-dom";
+import User from "../../redux/models/user/user";
 import { setFieldErrorsFromServer } from "../../utilities/generalUtility";
 
 export default function ForgotPassword() {

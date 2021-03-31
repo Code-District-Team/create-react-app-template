@@ -1,6 +1,6 @@
 import React from "react";
-import User from "../models/user/user";
 import { Redirect, Route } from "react-router-dom";
+import User from "../redux/models/user/user";
 import { isRolePresent, redirectIfInvalidTenant } from "../utilities/generalUtility";
 
 export default function RouteWithSubRoutes(route) {

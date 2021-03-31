@@ -1,4 +1,4 @@
-import K from "../../utilities/constants";
+import K from "../../../utilities/constants";
 
 export const upsertModel = (modelClass, modelRef) => {
   return {

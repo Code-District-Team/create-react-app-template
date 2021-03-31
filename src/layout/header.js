@@ -1,10 +1,9 @@
+import { DownOutlined, MenuFoldOutlined, MenuUnfoldOutlined, UserOutlined } from "@ant-design/icons";
+import { Avatar, Dropdown, Layout, Menu } from "antd";
 import React from "react";
-import { Layout, Menu, Dropdown, Avatar } from "antd";
-import { DownOutlined, UserOutlined, MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
-import { Link, useLocation } from "react-router-dom";
-import routes from "../routes/routes";
+import { useLocation } from "react-router-dom";
+import User from "../redux/models/user/user";
 import styles from "./layout.module.scss";
-import User from "../models/user/user";
 
 export default function Header({ collapsed, toggle }) {
   console.log(styles);

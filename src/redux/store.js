@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { createReducer } from "redux-orm";
-import User from "../models/user/user";
-import counterReducer from "../features/counter/counterSlice";
-import orm from "./orm";
 import logger from "redux-logger";
+import { createReducer } from "redux-orm";
+import counterReducer from "../pages/counter/counterSlice";
+import orm from "./models/orm";
+import User from "./models/user/user";
 
 orm.register(User);
 
