@@ -2,8 +2,8 @@ import { UserOutlined } from "@ant-design/icons";
 import { Layout, Menu } from "antd";
 import React from "react";
 import { Link } from "react-router-dom";
-import User from "../redux/models/user/user";
-import { isRolePresent } from "../utilities/generalUtility";
+import User from "../../redux/models/user/user";
+import { isRolePresent } from "../../utilities/generalUtility";
 //import styles from "./layout.module.scss";
 import navigations from "./navigations";
 
