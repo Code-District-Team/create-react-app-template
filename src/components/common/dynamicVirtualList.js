@@ -2,8 +2,9 @@ import _ from "lodash";
 import memoize from "memoize-one";
 import React, { memo, useEffect, useRef, useState } from "react";
 import { useResizeDetector } from "react-resize-detector";
-import { AutoSizer, WindowScroller } from "react-virtualized";
+import AutoSizer from "react-virtualized-auto-sizer";
 import { areEqual, VariableSizeList as List } from "react-window";
+import WindowScroller from "../../utilities/windowScroller/windowScroller";
 import LoadingSpinner from "./loadingSpinner";
 
 const HeightDetector = ({ index, children, onHeightChange }) => {
@@ -122,33 +123,33 @@ const DynamicVirtualList = ({
           </AutoSizer>
         </div>
       ) : (
-        <WindowScroller
-          onScroll={({ scrollTop }) => {
-            listRef.current.scrollTo(scrollTop);
-          }}
-        >
-          {({ height }) => (
-            <AutoSizer disableHeight>
-              {({ width }) => (
-                <List
-                  ref={listRef}
-                  itemCount={dataSource.length}
-                  itemSize={getItemSize}
-                  itemData={itemData}
-                  // width={width}
-                  // height={height}
-                  width={width}
-                  height={height}
-                  style={{
-                    height: "100% !important",
-                  }}
-                >
-                  {RowRenderer}
-                </List>
-              )}
-            </AutoSizer>
-          )}
-        </WindowScroller>
+        <>
+          <WindowScroller
+            onScroll={({ scrollTop }) => {
+              listRef.current.scrollTo(scrollTop);
+            }}
+          >
+            {() => <div />}
+          </WindowScroller>
+          <AutoSizer disableHeight>
+            {({ width }) => (
+              <List
+                ref={listRef}
+                itemCount={dataSource.length}
+                itemSize={getItemSize}
+                itemData={itemData}
+                width={width}
+                height={window.innerHeight}
+                style={{
+                  height: "100% !important",
+                }}
+                overscanCount={10}
+              >
+                {RowRenderer}
+              </List>
+            )}
+          </AutoSizer>
+        </>
       )}
       {loadingMore && <LoadingSpinner size="small" />}
     </>

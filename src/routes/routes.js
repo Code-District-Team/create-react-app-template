@@ -96,7 +96,10 @@ const routes = [
     exact: true,
     component: () => (
       <div>
-        <DynamicVirtualList dataSource={[1, 3, 4, 5]} />
+        <DynamicVirtualList
+          dataSource={new Array(1000).fill(Math.random())}
+          RowCard={({ record }) => <div>{record}</div>}
+        />
       </div>
     ),
     authenticated: true,
