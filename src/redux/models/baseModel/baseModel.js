@@ -11,6 +11,10 @@ export default class BaseModel extends Model {
 
   // Selectors
   static getSelector(modelClass) {
-    createSelector(orm[modelClass.modelName]);
+    return createSelector(orm[modelClass.modelName]);
   }
 }
+
+export const getSelector = (modelClass) => {
+  return createSelector(orm[modelClass.modelName]);
+};
