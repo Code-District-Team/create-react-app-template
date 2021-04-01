@@ -5,6 +5,7 @@ const K = {
       BaseAPI: process.env.REACT_APP_BASE_API_URL,
       DomainName: process.env.REACT_APP_CLIENT_DOMAIN_NAME,
       Timeout: process.env.REACT_APP_TIMEOUT,
+      BaseUrl: process.env.REACT_APP_BASE_URL.slice(0, -1),
       TenantURL: (domainPrefix = "") => {
         return "http://" + domainPrefix + process.env.REACT_APP_TENANT_PARTIAL_URL;
       },

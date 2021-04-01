@@ -80,8 +80,8 @@ export default class User extends BaseModel {
   }
 
   static isTokenAvailable() {
-    // return this.getUserObjectFromCookies().apiToken ? true : false;
-    return true;
+    return this.getUserObjectFromCookies().apiToken ? true : false;
+    // return true;
   }
 
   static getTenant() {

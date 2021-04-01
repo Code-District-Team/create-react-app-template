@@ -1,10 +1,9 @@
-import "antd/dist/antd.less";
-import "antd/lib/style/themes/default.less";
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router } from "react-router-dom";
 import App from "./app/App";
+import "./index.less";
 import store from "./redux/store";
 import * as serviceWorker from "./serviceWorker";
 import "./styles.scss";

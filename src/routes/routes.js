@@ -1,8 +1,8 @@
 import React from "react";
-import DynamicVirtualList from "../components/common/dynamicVirtualList";
 import GuestPageLayout from "../layout/guestPageLayout";
 import LoggedInPageLayout from "../layout/loggedInPageLayout";
 import Dashboard from "../pages/dashboard/dashboard";
+import Demo from "../pages/demo";
 import ForgotPassword from "../pages/forgotPassword/forgotPassword";
 import Login from "../pages/login/login";
 import NotFound from "../pages/notFound/notFound";
@@ -93,32 +93,42 @@ const routes = [
   {
     path: "/demo",
     name: "Demo",
-    exact: true,
-    component: () => (
-      <div>
-        <DynamicVirtualList
-          dataSource={new Array(1000).fill(Math.random())}
-          RowCard={({ record }) => <div>{record}</div>}
-        />
-      </div>
-    ),
-    authenticated: true,
     roles: [],
     layout: LoggedInPageLayout,
     children: [
       {
+        path: "/",
+        name: "Demo 1",
+        exact: true,
+        component: Demo,
+      },
+      {
         path: "/1",
         name: "Demo 1",
-        component: () => <div>YOOO 1</div>,
-        authenticated: true,
-        roles: [],
+        children: [
+          {
+            path: "/",
+            name: "Demo 1",
+            exact: true,
+            component: () => <div>YOOO 1</div>,
+          },
+          {
+            path: "/9",
+            name: "Demo grandchild ",
+            component: () => <div>grand child 1</div>,
+          },
+          {
+            path: "/:id",
+            name: "Demo grandchild with id ",
+            exact: true,
+            component: () => <div>grand child with id</div>,
+          },
+        ],
       },
       {
         path: "/2",
         name: "Demo 2",
         component: () => <div>YOOO 2</div>,
-        authenticated: true,
-        roles: [],
       },
     ],
   },

@@ -6,7 +6,7 @@ import K from "../utilities/constants";
 import { camelCaseKeys } from "../utilities/generalUtility";
 
 export default class NetworkCall {
-  static async fetch(request, useLoading = true) {
+  static async fetch(request, useLoading = false) {
     try {
       const response = useLoading
         ? await trackPromise(

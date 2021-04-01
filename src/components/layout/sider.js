@@ -2,6 +2,7 @@ import { UserOutlined } from "@ant-design/icons";
 import { Layout, Menu } from "antd";
 import React from "react";
 import { Link } from "react-router-dom";
+import Logo from "../../assets/images/logo.svg";
 import User from "../../redux/models/user/user";
 import { isRolePresent } from "../../utilities/generalUtility";
 //import styles from "./layout.module.scss";
@@ -16,7 +17,7 @@ export default function Sider({ collapsed }) {
   return (
     <Sider trigger={null} collapsible collapsed={collapsed}>
       <div className="ant-layout-sider-logo">
-        <img src="images/logo.png" alt="" />
+        <img src={Logo} alt="" />
       </div>
       <Menu defaultSelectedKeys={["1"]} mode="inline">
         {navigations.map((navigation, i) => {

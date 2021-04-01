@@ -17,9 +17,10 @@ export default function LoggedInPageLayout({ children }) {
       <Sider collapsed={collapsed} />
       <Layout className={styles["site-layout"]}>
         <Header collapsed={collapsed} toggle={toggle} />
+        <Breadcrumbs />
+
         <Content>
           {/* <Breadcrumbs /> */}
-          <Breadcrumbs />
           {children}
           {/* <Spinner></Spinner> */}
         </Content>
