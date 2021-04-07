@@ -20,9 +20,24 @@ const GridViewRowRenderer = ({ GridCard, itemsToShow, numberOfCol, cardProps }) 
   );
 };
 
-const cardWidth = 300;
+const cardWidth = 200;
 
-const getNumberOfProductsToShow = (width) => Math.floor(width / cardWidth) || 1;
+const findAntdColumn = (columnNumber) =>
+  24 % columnNumber == 0 || columnNumber == 0 ? columnNumber || 1 : findAntdColumn(columnNumber - 1);
+
+const getNumberOfProductsToShow = (width) => {
+  console.log("------------------------------------------");
+  console.log(width);
+  if (width > cardWidth) {
+    if (width % cardWidth == 0) {
+      return findAntdColumn(width / cardWidth || 1);
+    } else {
+      return getNumberOfProductsToShow(Math.floor(width / cardWidth) * cardWidth);
+    }
+  } else {
+    return 1;
+  }
+};
 
 const HeightDetector = ({ index, children, onHeightChange }) => {
   const { height, ref } = useResizeDetector();
@@ -55,9 +70,12 @@ const RowRenderer = memo(({ index, style, data }) => {
 
   if (isGrid) {
     numberOfProductsToShow = getNumberOfProductsToShow(width);
+    console.log("number of produsts to show", numberOfProductsToShow);
     numberOfCol = Math.floor(24 / numberOfProductsToShow);
+    console.log("number of col", numberOfCol);
     itemsToShow = _.take(_.drop(dataSource, index * numberOfProductsToShow), numberOfProductsToShow);
     numberOfRows = Math.ceil(dataSource.length / getNumberOfProductsToShow(width));
+    console.log("numberOfRows", numberOfRows);
   }
   if (index == numberOfRows - 1 && hasMore && !loadingMore && !initialLoading) {
     loadMore();
@@ -134,7 +152,7 @@ const DynamicVirtualList = ({
   cardProps,
   RowCard,
   GridCard,
-  isGrid,
+  isGrid = true,
 }) => {
   const [rowHeights, setRowHeights] = useState({});
   const getItemSize = (index) => rowHeights[index] || 80;
@@ -232,7 +250,7 @@ const DynamicVirtualList = ({
         >
           <WindowScroller
             onScroll={({ scrollTop }) => {
-              listRef.current.scrollTo(scrollTop);
+              listRef.current && listRef.current.scrollTo(scrollTop);
             }}
           >
             {() => <div></div>}
