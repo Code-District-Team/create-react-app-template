@@ -10,7 +10,16 @@ const HeightChanger = ({ record }) => {
       bodyStyle={{
         height: height,
       }}
-      cover={<img src="https://source.unsplash.com/random" />}
+      cover={
+        <img
+          style={{
+            height: 300,
+            width: "100%",
+            objectFit: "cover",
+          }}
+          src="https://source.unsplash.com/random"
+        />
+      }
     >
       {record}
 
@@ -35,11 +44,13 @@ export default function Dashboard() {
         GridCard={HeightChanger}
         isGrid={grid}
         loadMore={() => {
-          setNumber((prev) => prev + 100);
+          setNumber((prev) => (prev <= 200 ? prev + 10 : prev));
         }}
         hasMore={true}
         initialLoading={false}
         loadingMore={false}
+        overscanCount={5}
+        // fixedHeight={600}
       />
     </div>
   );

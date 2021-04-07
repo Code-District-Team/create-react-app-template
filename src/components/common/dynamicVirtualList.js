@@ -20,7 +20,7 @@ const GridViewRowRenderer = ({ GridCard, itemsToShow, numberOfCol, cardProps }) 
   );
 };
 
-const cardWidth = 250;
+const cardWidth = 300;
 
 const getNumberOfProductsToShow = (width) => Math.floor(width / cardWidth) || 1;
 
@@ -86,7 +86,7 @@ const RowRenderer = memo(({ index, style, data }) => {
   );
 }, areEqual);
 const createItemData = memoize(
-  (dataSource, hasMore, loadingMore, initialLoading, onHeightChange, RowCard, cardProps, loadMore) => ({
+  (
     dataSource,
     hasMore,
     loadingMore,
@@ -95,6 +95,19 @@ const createItemData = memoize(
     RowCard,
     cardProps,
     loadMore,
+    isGrid,
+    GridCard
+  ) => ({
+    dataSource,
+    hasMore,
+    loadingMore,
+    initialLoading,
+    onHeightChange,
+    RowCard,
+    cardProps,
+    loadMore,
+    isGrid,
+    GridCard,
   })
 );
 
@@ -154,9 +167,10 @@ const DynamicVirtualList = ({
     onHeightChange,
     RowCard,
     cardProps,
-    loadMore
+    loadMore,
+    isGrid,
+    GridCard
   );
-
   useEffect(() => {
     if (!_.isEmpty(rowHeights)) {
       let newHeights = new Array(
@@ -200,7 +214,7 @@ const DynamicVirtualList = ({
                 ref={listRef}
                 itemCount={isGrid ? Math.ceil(dataSource.length / getNumberOfProductsToShow(width)) : dataSource.length}
                 itemSize={getItemSize}
-                itemData={{ ...itemData, width, RowCard, loadMore }}
+                itemData={{ ...itemData, width }}
                 width={width}
                 height={height}
                 overscanCount={overscanCount}
@@ -229,7 +243,7 @@ const DynamicVirtualList = ({
                 ref={listRef}
                 itemCount={isGrid ? Math.ceil(dataSource.length / getNumberOfProductsToShow(width)) : dataSource.length}
                 itemSize={getItemSize}
-                itemData={{ ...itemData, width, isGrid, GridCard, RowCard }}
+                itemData={{ ...itemData, width }}
                 width={width}
                 height={window.innerHeight}
                 style={{
