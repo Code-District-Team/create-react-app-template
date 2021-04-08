@@ -42,6 +42,7 @@ export default function Dashboard() {
         dataSource={new Array(number).fill((() => Math.random() * 10000)()).map((item, i) => i)}
         RowCard={HeightChanger}
         GridCard={HeightChanger}
+        // fixedCardWidth={100}
         isGrid={grid}
         loadMore={() => {
           setNumber((prev) => (prev <= 200 ? prev + 10 : prev));

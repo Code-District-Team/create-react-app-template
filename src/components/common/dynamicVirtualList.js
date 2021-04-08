@@ -20,19 +20,15 @@ const GridViewRowRenderer = ({ GridCard, itemsToShow, numberOfCol, cardProps }) 
   );
 };
 
-const cardWidth = 200;
-
 const findAntdColumn = (columnNumber) =>
   24 % columnNumber == 0 || columnNumber == 0 ? columnNumber || 1 : findAntdColumn(columnNumber - 1);
 
-const getNumberOfProductsToShow = (width) => {
-  console.log("------------------------------------------");
-  console.log(width);
-  if (width > cardWidth) {
-    if (width % cardWidth == 0) {
-      return findAntdColumn(width / cardWidth || 1);
+const getNumberOfCardsToShow = (width, fixedCardWidth) => {
+  if (width > fixedCardWidth) {
+    if (width % fixedCardWidth == 0) {
+      return findAntdColumn(width / fixedCardWidth || 1);
     } else {
-      return getNumberOfProductsToShow(Math.floor(width / cardWidth) * cardWidth);
+      return getNumberOfCardsToShow(Math.floor(width / fixedCardWidth) * fixedCardWidth, fixedCardWidth);
     }
   } else {
     return 1;
@@ -61,21 +57,18 @@ const RowRenderer = memo(({ index, style, data }) => {
     isGrid,
     GridCard,
     RowCard,
+    fixedCardWidth,
   } = data;
   let numberOfRows = dataSource.length;
   let record = dataSource[index];
   let numberOfCol;
   let itemsToShow;
-  let numberOfProductsToShow = 1;
-
+  let numberOfCardsToShow = 1;
   if (isGrid) {
-    numberOfProductsToShow = getNumberOfProductsToShow(width);
-    console.log("number of produsts to show", numberOfProductsToShow);
-    numberOfCol = Math.floor(24 / numberOfProductsToShow);
-    console.log("number of col", numberOfCol);
-    itemsToShow = _.take(_.drop(dataSource, index * numberOfProductsToShow), numberOfProductsToShow);
-    numberOfRows = Math.ceil(dataSource.length / getNumberOfProductsToShow(width));
-    console.log("numberOfRows", numberOfRows);
+    numberOfCardsToShow = getNumberOfCardsToShow(width, fixedCardWidth);
+    numberOfCol = Math.floor(24 / numberOfCardsToShow);
+    itemsToShow = _.take(_.drop(dataSource, index * numberOfCardsToShow), numberOfCardsToShow);
+    numberOfRows = Math.ceil(dataSource.length / getNumberOfCardsToShow(width, fixedCardWidth));
   }
   if (index == numberOfRows - 1 && hasMore && !loadingMore && !initialLoading) {
     loadMore();
@@ -85,7 +78,7 @@ const RowRenderer = memo(({ index, style, data }) => {
     <div style={style}>
       <HeightDetector
         onHeightChange={(height, index) => {
-          onHeightChange(height, index, numberOfProductsToShow);
+          onHeightChange(height, index, numberOfCardsToShow);
         }}
         index={index}
       >
@@ -114,7 +107,8 @@ const createItemData = memoize(
     cardProps,
     loadMore,
     isGrid,
-    GridCard
+    GridCard,
+    fixedCardWidth
   ) => ({
     dataSource,
     hasMore,
@@ -126,6 +120,7 @@ const createItemData = memoize(
     loadMore,
     isGrid,
     GridCard,
+    fixedCardWidth,
   })
 );
 
@@ -152,7 +147,8 @@ const DynamicVirtualList = ({
   cardProps,
   RowCard,
   GridCard,
-  isGrid = true,
+  isGrid,
+  fixedCardWidth = 250,
 }) => {
   const [rowHeights, setRowHeights] = useState({});
   const getItemSize = (index) => rowHeights[index] || 80;
@@ -187,13 +183,16 @@ const DynamicVirtualList = ({
     cardProps,
     loadMore,
     isGrid,
-    GridCard
+    GridCard,
+    fixedCardWidth
   );
   useEffect(() => {
     if (!_.isEmpty(rowHeights)) {
       let newHeights = new Array(
         Math.ceil(
-          isGrid ? dataSource.length / getNumberOfProductsToShow(parentRef.current.offsetWidth) : dataSource.length
+          isGrid
+            ? dataSource.length / getNumberOfCardsToShow(parentRef.current.offsetWidth, fixedCardWidth)
+            : dataSource.length
         )
       )
         .fill(0)
@@ -230,7 +229,11 @@ const DynamicVirtualList = ({
             {({ width, height }) => (
               <List
                 ref={listRef}
-                itemCount={isGrid ? Math.ceil(dataSource.length / getNumberOfProductsToShow(width)) : dataSource.length}
+                itemCount={
+                  isGrid
+                    ? Math.ceil(dataSource.length / getNumberOfCardsToShow(width, fixedCardWidth))
+                    : dataSource.length
+                }
                 itemSize={getItemSize}
                 itemData={{ ...itemData, width }}
                 width={width}
@@ -259,7 +262,11 @@ const DynamicVirtualList = ({
             {({ width }) => (
               <List
                 ref={listRef}
-                itemCount={isGrid ? Math.ceil(dataSource.length / getNumberOfProductsToShow(width)) : dataSource.length}
+                itemCount={
+                  isGrid
+                    ? Math.ceil(dataSource.length / getNumberOfCardsToShow(width, fixedCardWidth))
+                    : dataSource.length
+                }
                 itemSize={getItemSize}
                 itemData={{ ...itemData, width }}
                 width={width}
