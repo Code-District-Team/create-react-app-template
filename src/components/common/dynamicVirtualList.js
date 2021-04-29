@@ -2,6 +2,7 @@ import { Col, Row } from "antd";
 import _ from "lodash";
 import memoize from "memoize-one";
 import React, { memo, useEffect, useRef, useState } from "react";
+import { useBottomScrollListener } from "react-bottom-scroll-listener";
 import { useResizeDetector } from "react-resize-detector";
 import AutoSizer from "react-virtualized-auto-sizer";
 import { areEqual, VariableSizeList as List } from "react-window";
@@ -45,20 +46,7 @@ const HeightDetector = ({ index, children, onHeightChange }) => {
   return <div ref={ref}>{children}</div>;
 };
 const RowRenderer = memo(({ index, style, data }) => {
-  let {
-    dataSource,
-    hasMore,
-    loadingMore,
-    initialLoading,
-    onHeightChange,
-    cardProps,
-    loadMore,
-    width,
-    isGrid,
-    GridCard,
-    RowCard,
-    fixedCardWidth,
-  } = data;
+  let { dataSource, onHeightChange, cardProps, width, isGrid, GridCard, RowCard, fixedCardWidth } = data;
   let numberOfRows = dataSource.length;
   let record = dataSource[index];
   let numberOfCol;
@@ -69,9 +57,6 @@ const RowRenderer = memo(({ index, style, data }) => {
     numberOfCol = Math.floor(24 / numberOfCardsToShow);
     itemsToShow = _.take(_.drop(dataSource, index * numberOfCardsToShow), numberOfCardsToShow);
     numberOfRows = Math.ceil(dataSource.length / getNumberOfCardsToShow(width, fixedCardWidth));
-  }
-  if (index == numberOfRows - 1 && hasMore && !loadingMore && !initialLoading) {
-    loadMore();
   }
 
   return (
@@ -96,33 +81,15 @@ const RowRenderer = memo(({ index, style, data }) => {
     </div>
   );
 }, areEqual);
-const createItemData = memoize(
-  (
-    dataSource,
-    hasMore,
-    loadingMore,
-    initialLoading,
-    onHeightChange,
-    RowCard,
-    cardProps,
-    loadMore,
-    isGrid,
-    GridCard,
-    fixedCardWidth
-  ) => ({
-    dataSource,
-    hasMore,
-    loadingMore,
-    initialLoading,
-    onHeightChange,
-    RowCard,
-    cardProps,
-    loadMore,
-    isGrid,
-    GridCard,
-    fixedCardWidth,
-  })
-);
+const createItemData = memoize((dataSource, onHeightChange, RowCard, cardProps, isGrid, GridCard, fixedCardWidth) => ({
+  dataSource,
+  onHeightChange,
+  RowCard,
+  cardProps,
+  isGrid,
+  GridCard,
+  fixedCardWidth,
+}));
 
 /**
  *
@@ -173,19 +140,7 @@ const DynamicVirtualList = ({
     }
   };
 
-  const itemData = createItemData(
-    dataSource,
-    hasMore,
-    loadingMore,
-    initialLoading,
-    onHeightChange,
-    RowCard,
-    cardProps,
-    loadMore,
-    isGrid,
-    GridCard,
-    fixedCardWidth
-  );
+  const itemData = createItemData(dataSource, onHeightChange, RowCard, cardProps, isGrid, GridCard, fixedCardWidth);
   useEffect(() => {
     if (!_.isEmpty(rowHeights)) {
       let newHeights = new Array(
@@ -215,6 +170,12 @@ const DynamicVirtualList = ({
     listRef.current && listRef.current.resetAfterIndex(0);
   }, [isGrid]);
 
+  const containerRef = useBottomScrollListener(() => {
+    if (hasMore && !loadingMore && !initialLoading) {
+      loadMore();
+    }
+  });
+
   return initialLoading ? (
     <LoadingSpinner />
   ) : (
@@ -239,6 +200,7 @@ const DynamicVirtualList = ({
                 width={width}
                 height={height}
                 overscanCount={overscanCount}
+                outerRef={containerRef}
               >
                 {(props) => <RowRenderer {...props} />}
               </List>

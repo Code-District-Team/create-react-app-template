@@ -33,7 +33,7 @@ export default function Dashboard() {
   const [initialLoading, setInitialLoading] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
   const [dataSource, setDataSource] = useState([]);
-  let pageNumber = 1;
+  const [pageNumber, setPageNumber] = useState(1);
 
   useEffect(() => {
     getData();
@@ -49,7 +49,8 @@ export default function Dashboard() {
 
   const handleLoadMore = () => {
     setLoadingMore(() => true);
-    pageNumber = pageNumber + 1;
+    setPageNumber((state) => state + 1);
+    console.log(pageNumber);
     getData();
   };
   return (
