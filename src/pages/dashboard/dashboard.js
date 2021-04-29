@@ -1,5 +1,5 @@
 import { Button, Card, PageHeader, Switch } from "antd";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DynamicVirtualList from "../../components/common/dynamicVirtualList";
 
 const HeightChanger = ({ record }) => {
@@ -29,8 +29,29 @@ const HeightChanger = ({ record }) => {
 };
 
 export default function Dashboard() {
-  const [number, setNumber] = useState(100);
   const [grid, setGrid] = useState(true);
+  const [initialLoading, setInitialLoading] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
+  const [dataSource, setDataSource] = useState([]);
+  let pageNumber = 1;
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const getData = () => {
+    setTimeout(() => {
+      setLoadingMore(() => false);
+      setInitialLoading(false);
+      setDataSource((state) => [...state, ...new Array(10).fill(pageNumber)]);
+    }, 5000);
+  };
+
+  const handleLoadMore = () => {
+    setLoadingMore(() => true);
+    pageNumber = pageNumber + 1;
+    getData();
+  };
   return (
     <div>
       <Switch checked={grid} onChange={(t) => setGrid(t)}>
@@ -39,18 +60,16 @@ export default function Dashboard() {
 
       <PageHeader title="Dashboard"></PageHeader>
       <DynamicVirtualList
-        dataSource={new Array(number).fill((() => Math.random() * 10000)()).map((item, i) => i)}
+        dataSource={dataSource}
         RowCard={HeightChanger}
         GridCard={HeightChanger}
         // fixedCardWidth={100}
         isGrid={grid}
-        loadMore={() => {
-          setNumber((prev) => (prev <= 200 ? prev + 10 : prev));
-        }}
+        loadMore={handleLoadMore}
         hasMore={true}
-        initialLoading={false}
-        loadingMore={false}
-        overscanCount={5}
+        initialLoading={initialLoading}
+        loadingMore={loadingMore}
+        // overscanCount={5}
         // fixedHeight={600}
       />
     </div>
