@@ -9,8 +9,8 @@ import "./index.less";
 import store from "./redux/store";
 import * as serviceWorker from "./serviceWorker";
 import "./styles.scss";
-import de from "./translations/de.json";
-import en from "./translations/en.json";
+import de from "./translations/de/translation.json";
+import en from "./translations/en/translation.json";
 
 i18n
   .use(initReactI18next) // passes i18n down to react-i18next
