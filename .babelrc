@@ -1,0 +1,15 @@
+{
+  "plugins": [
+    [
+      "i18next-extract",
+      {
+        "enableExperimentalIcu": true,
+        "locales": ["en", "de"],
+        "outputPath": "./src/translations/{{locale}}/{{ns}}.json"
+      }
+    ],
+
+    "@babel/plugin-transform-react-jsx",
+    "@babel/plugin-proposal-class-properties"
+  ]
+}

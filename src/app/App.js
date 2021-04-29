@@ -16,8 +16,8 @@ function App() {
         }}
       >
         Change Language
-      </Switch>
-      <h2>{t("Welcome to React")}</h2> */}
+      </Switch> */}
+      <h2>{t("Welcome to React")}</h2>
       <Switch>
         {routes.map((route, i) => (
           <CustomRoute key={i} {...route} exact={route.exact ?? false} />

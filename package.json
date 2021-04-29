@@ -43,7 +43,8 @@
     "eject": "react-scripts eject",
     "analyze": "source-map-explorer 'build/static/js/*.js'",
     "prettify": "prettier --write \"src/**/*.js\"",
-    "serve": "npm run build && serve -s build -p 3000"
+    "serve": "npm run build && serve -s build -p 3000",
+    "extract-translations": "babel -f .babelrc 'src/**/*.{js,jsx,ts,tsx}'"
   },
   "prettier": {
     "singleQuote": false,
@@ -59,10 +60,14 @@
     "extends": "react-app"
   },
   "devDependencies": {
-    "source-map-explorer": "^2.5.0",
+    "@babel/cli": "^7.0.0",
+    "@babel/plugin-proposal-class-properties": "^7.13.0",
+    "@babel/plugin-transform-react-jsx": "^7.13.12",
+    "babel-plugin-i18next-extract": "^0.8.3",
     "prettier": "^2.2.1",
     "redux-logger": "^3.0.6",
-    "serve": "^11.3.2"
+    "serve": "^11.3.2",
+    "source-map-explorer": "^2.5.0"
   },
   "browserslist": {
     "production": [
