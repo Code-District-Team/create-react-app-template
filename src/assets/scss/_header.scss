@@ -1,0 +1,12 @@
+.header-wrap {
+    display: flex;
+    .header-content {
+        width: calc( 100% - 50px );
+        img {
+            max-width: 50px;
+            @media screen and (min-width: 768px) {
+                display: none; 
+            }
+        }
+    }
+}

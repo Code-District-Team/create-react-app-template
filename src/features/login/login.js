@@ -15,7 +15,7 @@ export default function Login() {
     await dispatch(User.loginCall(values.username, values.password));
 
     // Logged in.
-    const { from } = location.state || { from: {path: '\dashboard'} };
+    const { from } = location.state || { from: {path: `/dashboard`} };
     history.replace(from);
 
   };

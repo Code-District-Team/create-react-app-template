@@ -1,9 +1,14 @@
 .logo {
-    height: 32px;
-    background: rgba(255, 255, 255, 0.2);
-    margin: 16px;
+    margin: auto;
+    width: 70px;
+    padding: 1rem;
   }
-  
+  .ant-layout-sider-collapsed {
+    .logo {
+      padding: .5rem;
+      width: 50px;
+    }
+  }
   .siteLayout .site-layout-background {
     background: #fff;
   }

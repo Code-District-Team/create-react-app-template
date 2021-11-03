@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation, Switch } from "react-router-dom";
+import { Switch } from "react-router-dom";
 import "antd/dist/antd.css";
 import "./App.scss";
 import routes from "../routes/routes";

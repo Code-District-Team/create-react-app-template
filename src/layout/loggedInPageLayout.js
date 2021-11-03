@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { Layout } from "antd";
 import Header from "../layout/header";
 import Sider from "../layout/sider";
@@ -9,11 +9,12 @@ import styles from './layout.module.scss';
 
 export default function LoggedInPageLayout({ children }) {
   const { Content } = Layout;
+  const [collapsed, setCollapsed] = useState(false);
   return (
     <Layout style={{ minHeight: '100vh' }}>
-        <Sider />
+        <Sider collapsed={collapsed} setCollapsed={setCollapsed}/>
         <Layout className={styles["site-layout"]}>
-          <Header />
+          <Header collapsed={collapsed} setCollapsed={setCollapsed}/>
           <Content style={{ margin: '0 16px' }}>
             <Breadcrumbs />
             {children}
