@@ -6,7 +6,8 @@ import Register from '../features/register/register';
 import Unauthorized from '../features/unauthorized/unauthorized';
 import Users from '../features/users/users';
 import GuestPageLayout from '../layout/guestPageLayout';
-import LoggedInPageLayout from '../layout/loggedInPageLayout';
+// import LoggedInPageLayout from '../layout/logo-in-sidebar-loggedInPageLayout';
+import LoggedInPageLayout from '../layout/logo-in-header-loggedInPageLayout';
 import K from '../utilities/constants';
 
 

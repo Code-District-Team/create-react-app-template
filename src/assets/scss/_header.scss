@@ -9,4 +9,37 @@
             }
         }
     }
+    &.lih-header-wrap {
+       .lih-header-logo-wrap {
+           width: 200px;
+           display: flex;
+           .header-logo{
+               width: calc(100% - 50px);
+               @media screen and (min-width: 768px) {
+                    padding-left: 1rem;
+               }
+               @media screen and (max-width: 767px) {
+                    position: absolute;
+                    right: 0;
+               }
+               img {
+                   max-width: 50px;
+               }
+           }
+           
+       } 
+       .header-content {
+            width: calc( 100% - 200px );
+        }
+    }
+    .profile-setting-dropdwon {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center; 
+        .user-name {
+            color: #fff;
+        }
+    }
+
 }
+
