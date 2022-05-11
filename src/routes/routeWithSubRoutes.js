@@ -14,7 +14,7 @@ export default function RouteWithSubRoutes(route) {
             if (!route.authenticated || (route.authenticated && User.isTokenAvailable())) {
                 // Check domain prefix
                 redirectIfInvalidTenant()
-                if((route.path === '/login' || route.path === '/forgot-password' || route.path === '/set-password') && User.isTokenAvailable())
+                if(["/login","/forgot-password","/set-password"].includes(route.path) && User.isTokenAvailable())
                     return <Redirect to={{
                             pathname: '/',
                             state: { from: props.location }
