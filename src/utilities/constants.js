@@ -1,17 +1,6 @@
 const K = {
   Network: {
     URL: {
-      // Production
-      // Base: 'http://ninjirosoft.com:8080/',
-      // BaseAPI: 'http://ninjirosoft.com:8080/api',
-      // TenantURL: (domainPrefix = '') => {
-      //     return 'http://' + domainPrefix + '.' + 'ninjirosoft.com:8080/api'
-      // },
-      // Client: {
-      //     BaseHost: 'ninjirosoft.com',
-      //     BasePort: '80',
-      // },
-
       // Development
       Base: process.env.REACT_APP_BASE_URL,
       BaseAPI: process.env.REACT_APP_BASE_API_URL,
@@ -32,11 +21,8 @@ const K = {
 
       Protocol: process.env.REACT_APP_PROTOCOL,
 
-      // Tenant
-      GetTenant: "/tenant/get",
-
       // Assignment
-      LoginUser: "/user/login",
+      LoginUser: "/auth/signin",
 
       // Forget password
       ForgotPassword: "/user/send_password_reset_token",
@@ -79,9 +65,6 @@ const K = {
     DELETE: "DELETE",
     DELETE_ALL: "DELETE_ALL",
     SET: "SET",
-
-    // Settings
-    UPSERT_SETTING: "UPSERT_SETTING",
   },
   Cookie: {
     Key: {
@@ -94,5 +77,4 @@ const K = {
     User: "User",
   },
 };
-
 export default K;

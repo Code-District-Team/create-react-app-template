@@ -1,4 +1,3 @@
-import React from "react";
 import Dashboard from "../features/dashboard/dashboard";
 import Login from "../features/login/login";
 import ForgotPassword from "../features/forgotPassword/forgotPassword";
@@ -86,7 +85,7 @@ const routes = [
     name: "Dashboard",
     exact: true,
     component: Dashboard,
-     authenticated: true,
+    authenticated: true,
     layout: LoggedInPageLayout,
   },
   {
