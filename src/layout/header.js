@@ -6,16 +6,12 @@ import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
 } from "@ant-design/icons";
-import { Link, useLocation } from "react-router-dom";
-import routes from "../routes/routes";
 import styles from "./layout.module.scss";
-import User from "../models/user/user";
-
+import User from "models/user/user";
 
 export default function Header({ collapsed, toggle }) {
   console.log(styles);
   const { Header } = Layout;
-  const location = useLocation();
 
   const menu = (
     <Menu>
@@ -26,7 +22,9 @@ export default function Header({ collapsed, toggle }) {
         <a href="">Change Password</a>
       </Menu.Item>
       <Menu.Divider />
-      <Menu.Item key="3"  onClick={()=> User.logoutCall()}>Logout</Menu.Item>
+      <Menu.Item key="3" onClick={() => User.logoutCall()}>
+        Logout
+      </Menu.Item>
     </Menu>
   );
   return (
@@ -44,7 +42,7 @@ export default function Header({ collapsed, toggle }) {
               onClick={(e) => e.preventDefault()}
             >
               <Avatar icon={<UserOutlined />} /> {User.getName()}{" "}
-               <DownOutlined />
+              <DownOutlined />
             </a>
           </Dropdown>
         </div>

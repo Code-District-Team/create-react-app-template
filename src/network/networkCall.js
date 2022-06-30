@@ -1,15 +1,14 @@
-import React from "react";
 import axios from "axios";
-import K from "../utilities/constants";
-import { message, notification } from "antd";
-import { camelCaseKeys } from "../utilities/generalUtility";
+import K from "utilities/constants";
+import { message } from "antd";
+import { camelCaseKeys } from "utilities/generalUtility";
 import { trackPromise } from "react-promise-tracker";
-import User from "../models/user/user";
+import User from "models/user/user";
 
 export default class NetworkCall {
   static async fetch(request, useLoading = true) {
     try {
-      const response = useLoading 
+      const response = useLoading
         ? await trackPromise(
             NetworkCall.axios({
               method: request.method,
@@ -42,7 +41,7 @@ export default class NetworkCall {
           error: error,
         });
       } else if (error.status === K.Network.StatusCode.Unauthorized) {
-         User.logoutCall("User unauthorized");
+        User.logoutCall("User unauthorized");
       } else message.error(error.data.message);
 
       if ("errors" in error.data)

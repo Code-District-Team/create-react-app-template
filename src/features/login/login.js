@@ -1,16 +1,16 @@
 import React, { useEffect } from "react";
+import qs from "qs";
+import md5 from "md5";
 import { Form, Input, Button, Checkbox, Card, message } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
-import User from "../../models/user/user";
 import { useDispatch } from "react-redux";
 import { useLocation, Link } from "react-router-dom";
+import User from "models/user/user";
 import {
   deleteQueryParam,
   redirectToUrl,
   setFieldErrorsFromServer,
-} from "../../utilities/generalUtility";
-import qs from 'qs';
-var md5 = require("md5");
+} from "utilities/generalUtility";
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -18,13 +18,13 @@ export default function Login() {
   const [form] = Form.useForm();
   const paramJson = qs.parse(location.search, { ignoreQueryPrefix: true });
 
-  useEffect(()=>{
-    console.log("paramJson: ", paramJson)
-    if(paramJson.err){
-      message.error(paramJson.err)
-      deleteQueryParam("err")
+  useEffect(() => {
+    console.log("paramJson: ", paramJson);
+    if (paramJson.err) {
+      message.error(paramJson.err);
+      deleteQueryParam("err");
     }
-  }, [])
+  }, []);
 
   const onFinish = async (values) => {
     let encryptedPass = md5(values.password);
@@ -33,7 +33,7 @@ export default function Login() {
         User.loginCall(values.email, encryptedPass, values.remember)
       );
       // const { from } = location.state || { from: { path: "/" } };
-      redirectToUrl(user.tenant.domainPrefix,"/");
+      redirectToUrl(user.tenant.domainPrefix, "/");
     } catch (error) {
       setFieldErrorsFromServer(error, form, values);
     }

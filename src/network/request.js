@@ -1,4 +1,4 @@
-import K from "../utilities/constants";
+import K from "utilities/constants";
 import Cookies from "js-cookie";
 
 export default class Request {
