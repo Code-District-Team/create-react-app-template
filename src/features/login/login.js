@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import { Form, Input, Button, Checkbox, Card, message } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
-import User from "../../models/user/user";
+import User from "models/user/user";
 import { useDispatch } from "react-redux";
 import { useLocation, Link, useHistory } from "react-router-dom";
 import {
   deleteQueryParam,
   setFieldErrorsFromServer,
-} from "../../utilities/generalUtility";
+} from "utilities/generalUtility";
 import qs from "qs";
 import md5 from "md5";
 

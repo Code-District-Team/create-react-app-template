@@ -1,5 +1,5 @@
-import K from "../utilities/constants";
-import User from "../models/user/user";
+import K from "utilities/constants";
+import User from "models/user/user";
 
 export default class Request {
   constructor(

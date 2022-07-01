@@ -1,14 +1,13 @@
 import { attr } from "redux-orm";
 import Cookies from "js-cookie";
 import CryptoJS from "crypto-js";
-import BaseModel from "../baseModel/baseModel";
-import NetworkCall from "../../network/networkCall";
-import Request from "../../network/request";
-import baseReducer from "../baseModel/baseReducer";
-import { upsertModel } from "../baseModel/baseActions";
-import K from "../../utilities/constants";
-
-import { redirectToLogin } from "../../utilities/generalUtility";
+import BaseModel from "models/baseModel/baseModel";
+import NetworkCall from "network/networkCall";
+import Request from "network/request";
+import K from "utilities/constants";
+import { redirectToLogin } from "utilities/generalUtility";
+import baseReducer from "models/baseModel/baseReducer";
+import { upsertModel } from "models/baseModel/baseActions";
 
 export default class User extends BaseModel {
   // API call using thunk.

@@ -1,15 +1,15 @@
-import Dashboard from "../features/dashboard/dashboard";
-import Login from "../features/login/login";
-import ForgotPassword from "../features/forgotPassword/forgotPassword";
-import SetPassword from "../features/setPassword/setPassword";
-import NotFound from "../features/notFound/notFound";
-import Projects from "../features/projects/projects";
-import Register from "../features/register/register";
-import Unauthorized from "../features/unauthorized/unauthorized";
-import Users from "../features/users/users";
-import GuestPageLayout from "../layout/guestPageLayout";
-import LoggedInPageLayout from "../layout/loggedInPageLayout";
-import K from "../utilities/constants";
+import Dashboard from "features/dashboard/dashboard";
+import Login from "features/login/login";
+import ForgotPassword from "features/forgotPassword/forgotPassword";
+import SetPassword from "features/setPassword/setPassword";
+import NotFound from "features/notFound/notFound";
+import Projects from "features/projects/projects";
+import Register from "features/register/register";
+import Unauthorized from "features/unauthorized/unauthorized";
+import Users from "features/users/users";
+import GuestPageLayout from "layout/guestPageLayout";
+import LoggedInPageLayout from "layout/loggedInPageLayout";
+import K from "utilities/constants";
 
 // Template for a route
 // {

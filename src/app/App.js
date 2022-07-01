@@ -1,9 +1,9 @@
 import React from "react";
 import { Switch } from "react-router-dom";
 import "./App.less";
-import routes from "../routes/routes";
-import RouteWithSubRoutes from "../routes/routeWithSubRoutes";
-import ErrorBoundary from "../common/components/errorBoundary/errorBoundary";
+import routes from "routes/routes";
+import RouteWithSubRoutes from "routes/routeWithSubRoutes";
+import ErrorBoundary from "common/components/errorBoundary/errorBoundary";
 
 function App() {
   return (

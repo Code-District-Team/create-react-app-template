@@ -1,7 +1,7 @@
 import React from "react";
-import User from "../models/user/user";
+import User from "models/user/user";
 import { Redirect, Route } from "react-router-dom";
-import { isRolePresent } from "../utilities/generalUtility";
+import { isRolePresent } from "utilities/generalUtility";
 
 export default function RouteWithSubRoutes(route) {
   return (

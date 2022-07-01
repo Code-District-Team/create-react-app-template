@@ -1,5 +1,5 @@
 import { createSelector, Model } from "redux-orm";
-import orm from "../../app/orm";
+import orm from "app/orm";
 
 export default class BaseModel extends Model {
   static capitalModelName() {

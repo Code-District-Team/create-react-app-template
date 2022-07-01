@@ -4,7 +4,7 @@ import { LockOutlined } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 import md5 from "md5";
-import User from "../../models/user/user";
+import User from "models/user/user";
 
 export default function SetPassword() {
   const dispatch = useDispatch();
