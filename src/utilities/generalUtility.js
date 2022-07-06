@@ -68,11 +68,10 @@ export const redirectToLogin = (error = "") => {
   }
 };
 
-export const redirectToUrl = (domainPrefix, path) => {
+export const redirectToUrl = (path) => {
   window.location =
     window.location.protocol +
     "//" +
-    (domainPrefix ? domainPrefix + "." : "") +
     K.Network.URL.Client.BaseHost +
     ":" +
     K.Network.URL.Client.BasePort +
