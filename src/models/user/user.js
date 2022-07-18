@@ -33,7 +33,7 @@ export default class User extends BaseModel {
   static logoutCall(error = "") {
     Cookies.remove(K.Cookie.Key.User, {
       path: "/",
-      domain: "." + K.Network.URL.Client.BaseHost,
+      domain: K.Network.URL.Client.BaseHost,
     });
     redirectToLogin(error);
   }
@@ -59,7 +59,7 @@ export default class User extends BaseModel {
       console.log(encryptedUser);
       Cookies.set(K.Cookie.Key.User, encryptedUser, {
         path: "/",
-        domain: "." + K.Network.URL.Client.BaseHost,
+        domain: K.Network.URL.Client.BaseHost,
         expires: remember ? 365 : "",
       });
       dispatch(upsertModel(User, user));
