@@ -12,11 +12,10 @@ export default class Request {
   ) {
     const token = Cookies.get(K.Cookie.Key.Token);
     const domainPrefix = Cookies.get(K.Cookie.Key.Tenant);
-    const permissions = "";
     headers = {
       ...(defaultHeaderType === K.Network.Header.Type.Json
-        ? K.Network.Header.Default(token, permissions)
-        : K.Network.Header.Authorization(token, permissions)),
+        ? K.Network.Header.Default(token)
+        : K.Network.Header.Authorization(token)),
       ...headers,
     };
     this.url = isTenant

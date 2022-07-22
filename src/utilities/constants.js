@@ -53,15 +53,13 @@ const K = {
     Header: {
       ContentType: "Content-Type",
       ApplicationJson: "application/json",
-      Default: (token = "", permissions = "") => ({
+      Default: (token = "") => ({
         "Content-Type": "application/json",
         Accept: "application/json",
         Authorization: "Bearer " + token,
-        Permissions: permissions,
       }),
-      Authorization: (token = "", permissions = "") => ({
+      Authorization: (token = "") => ({
         Authorization: "Bearer " + token,
-        Permissions: permissions,
       }),
       Type: {
         Json: "json",

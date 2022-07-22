@@ -7,14 +7,32 @@ import navigations from "./navigations";
 import { isRolePresent } from "utilities/generalUtility";
 import User from "models/user/user";
 
-export default function Sider({ collapsed }) {
-  // get current user's role
-
+export default function Sider({ collapsed, setCollapsed }) {
   const { Sider } = Layout;
   const { SubMenu } = Menu;
+  const [collapsedWidth, setCollapsedWidth] = React.useState(80);
 
+  const onCollapse = (collapsed) => {
+    setCollapsed(collapsed);
+  };
+  const onBreakpoint = (broken) => {
+    // * Hide sider on screen width less than 768px
+    if (broken) {
+      setCollapsedWidth(0);
+    } else {
+      setCollapsedWidth(80);
+    }
+  };
   return (
-    <Sider trigger={null} collapsible collapsed={collapsed}>
+    <Sider
+      breakpoint="md"
+      collapsible
+      collapsed={collapsed}
+      collapsedWidth={collapsedWidth}
+      onCollapse={onCollapse}
+      onBreakpoint={onBreakpoint}
+      trigger={null}
+    >
       <div className="ant-layout-sider-logo">
         <img src="images/logo.png" alt="" />
       </div>
