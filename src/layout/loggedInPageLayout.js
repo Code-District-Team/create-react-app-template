@@ -16,7 +16,7 @@ export default function LoggedInPageLayout({ children }) {
   };
   return (
     <Layout>
-      <Sider collapsed={collapsed} />
+      <Sider collapsed={collapsed} setCollapsed={setCollapsed} />
       <Layout className={styles["site-layout"]}>
         <Header collapsed={collapsed} toggle={toggle} />
         <Content>
