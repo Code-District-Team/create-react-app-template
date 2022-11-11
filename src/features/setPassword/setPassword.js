@@ -2,13 +2,13 @@ import React from "react";
 import { Form, Input, Button, Checkbox, Card, message } from "antd";
 import { LockOutlined } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
-import { useHistory, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import md5 from "md5";
 import User from "models/user/user";
 
 export default function SetPassword() {
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
   const location = useLocation();
 
   const onFinish = async (values) => {
@@ -20,11 +20,9 @@ export default function SetPassword() {
     let encryptedPass = md5(values.password);
 
     try {
-      const user = await dispatch(
-        User.resetPassword(encryptedPass, token, values.remember)
-      );
+      dispatch(User.resetPassword(encryptedPass, token, values.remember));
       const { from } = location.state || { from: { path: "/" } };
-      history.replace(from);
+      navigate.replace(from);
     } catch (error) {}
   };
 

@@ -6,8 +6,7 @@ import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
 } from "@ant-design/icons";
-import { Link, useLocation } from "react-router-dom";
-import routes from "../routes/routes";
+import { useLocation } from "react-router-dom";
 import styles from "./layout.module.scss";
 import User from "../models/user/user";
 
@@ -20,10 +19,10 @@ export default function Header({ collapsed, toggle }) {
   const menu = (
     <Menu>
       <Menu.Item key="0">
-        <a href="">Profile</a>
+        <a href="#">Profile</a>
       </Menu.Item>
       <Menu.Item key="1">
-        <a href="">Change Password</a>
+        <a href="#">Change Password</a>
       </Menu.Item>
       <Menu.Divider />
       <Menu.Item key="3"  onClick={()=> User.logoutCall()}>Logout</Menu.Item>

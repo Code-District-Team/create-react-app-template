@@ -3,7 +3,7 @@ import { Form, Input, Button, Checkbox, Card, message } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import User from "models/user/user";
 import { useDispatch } from "react-redux";
-import { useLocation, Link, useHistory } from "react-router-dom";
+import { useLocation, Link, useNavigate } from "react-router-dom";
 import {
   deleteQueryParam,
   setFieldErrorsFromServer,
@@ -14,7 +14,7 @@ import md5 from "md5";
 export default function Login() {
   const dispatch = useDispatch();
   const location = useLocation();
-  const history = useHistory();
+  const navigate = useNavigate();
   const [form] = Form.useForm();
   const paramJson = qs.parse(location.search, { ignoreQueryPrefix: true });
 
@@ -29,11 +29,9 @@ export default function Login() {
   const onFinish = async (values) => {
     const encryptedPass = md5(values.password);
     try {
-      const user = await dispatch(
-        User.loginCall(values.email, encryptedPass, values.remember)
-      );
+      dispatch(User.loginCall(values.email, encryptedPass, values.remember));
       const { from } = location.state || { from: { path: "/" } };
-      history.replace(from);
+      navigate.replace(from);
     } catch (error) {
       setFieldErrorsFromServer(error, form, values);
     }
@@ -93,6 +91,7 @@ export default function Login() {
                 }
                 placeholder="Password"
                 size="large"
+                autoComplete="false"
               />
             </Form.Item>
             <Form.Item>

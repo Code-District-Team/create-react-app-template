@@ -1,9 +1,9 @@
 import { Button, Result } from "antd";
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const SomethingWentWrong = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   return (
     <Result
@@ -14,7 +14,7 @@ const SomethingWentWrong = () => {
         <Button
           type="primary"
           onClick={() => {
-            history.goBack();
+            navigate.goBack();
           }}
         >
           Back Home

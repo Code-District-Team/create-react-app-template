@@ -3,14 +3,14 @@ import { Form, Input, Button, Card, Divider } from "antd";
 import { UserOutlined, ArrowLeftOutlined } from "@ant-design/icons";
 import User from "models/user/user";
 import { useDispatch } from "react-redux";
-import { useHistory, useLocation, Link } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import { message } from "antd";
 import { setFieldErrorsFromServer } from "utilities/generalUtility";
 
 export default function ForgotPassword() {
   const [form] = Form.useForm();
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
   const location = useLocation();
 
   const onFinish = async (values) => {
