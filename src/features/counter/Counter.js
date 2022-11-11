@@ -6,7 +6,7 @@ import {
   incrementByAmount,
   incrementAsync,
   selectCount,
-} from "./counterSlice";
+} from "../../redux/counter/counterSlice";
 import styles from "./Counter.module.css";
 import { Button } from 'antd';
 

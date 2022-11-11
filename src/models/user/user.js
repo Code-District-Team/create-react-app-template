@@ -4,6 +4,7 @@ import NetworkCall from "network/networkCall";
 import Request from "network/request";
 import K from "utilities/constants";
 import { redirectToLogin } from "utilities/generalUtility";
+import { saveUserData } from "redux/user/userSlice";
 
 export default class User {
   // API call using thunk.
@@ -21,7 +22,9 @@ export default class User {
         expires: remember ? 365 : "",
       });
 
-      // dispatch(upsertModel(User, user));
+      // here we can store loggedIn user date to redux store
+      dispatch(saveUserData(user));
+
       return user;
     };
   }
@@ -58,7 +61,6 @@ export default class User {
         domain: K.Network.URL.Client.BaseHost,
         expires: remember ? 365 : "",
       });
-      // dispatch(upsertModel(User, user));
       return user;
     };
   }
