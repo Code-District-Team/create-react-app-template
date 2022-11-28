@@ -72,7 +72,7 @@ export default class User extends BaseModel {
   static getUserObjectFromCookies() {
     let cookieUser = Cookies.get(K.Cookie.Key.User);
     let bytes = cookieUser
-      ? CryptoJS.AES.decrypt(cookieUser, "blc_logged_in_user")
+      ? CryptoJS.AES.decrypt(cookieUser, K.Cookie.Key.EncryptionKey)
       : "{}";
     try {
       let utfBytes = bytes.toString(CryptoJS.enc.Utf8);
