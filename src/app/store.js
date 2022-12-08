@@ -6,10 +6,10 @@ import userSlice from "redux/user/userSlice";
 export default configureStore({
   reducer: {
     counter: counterReducer,
-    user: userSlice
+    user: userSlice,
   },
 
-  // everytime when we dispatch an action, this line will console 
+  // everytime when we dispatch an action, this line will console
   // the previous state, action with payload and updated state
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });

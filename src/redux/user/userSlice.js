@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  userDetails: ""
+  userDetails: "",
 };
 
 export const userSlice = createSlice({
@@ -10,7 +10,7 @@ export const userSlice = createSlice({
   reducers: {
     saveUserData: (state, action) => {
       state.userDetails = action.payload;
-    }
+    },
   },
 });
 

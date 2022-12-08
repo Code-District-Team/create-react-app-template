@@ -10,9 +10,13 @@ function App() {
     <ErrorBoundary>
       <div className="App">
         <Routes>
-          {routes.map((route, i) => 
-            <Route key={i} path={route.path} element={<RouteWithSubRoutes route={route}/>} />
-          )}
+          {routes.map((route, i) => (
+            <Route
+              key={i}
+              path={route.path}
+              element={<RouteWithSubRoutes route={route} />}
+            />
+          ))}
         </Routes>
       </div>
     </ErrorBoundary>
