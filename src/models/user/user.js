@@ -18,7 +18,7 @@ export default class User {
       console.log(encryptedUser);
       Cookies.set(K.Cookie.Key.User, encryptedUser, {
         path: "/",
-        domain: "." + K.Network.URL.Client.BaseHost,
+        domain: K.Network.URL.Client.BaseHost,
         expires: remember ? 365 : "",
       });
 
@@ -83,11 +83,11 @@ export default class User {
   }
 
   static isTokenAvailable() {
-    return this.getUserObjectFromCookies().apiToken ? true : false;
+    return this.getUserObjectFromCookies().api_token ? true : false;
   }
 
   static getToken() {
-    return this.getUserObjectFromCookies().apiToken ?? "";
+    return this.getUserObjectFromCookies().api_token ?? "";
   }
 
   static getName() {

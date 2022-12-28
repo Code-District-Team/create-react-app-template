@@ -1,20 +1,20 @@
-import React, { useEffect } from "react";
-import { Form, Input, Button, Checkbox, Card, message } from "antd";
-import { UserOutlined, LockOutlined } from "@ant-design/icons";
+import { LockOutlined, UserOutlined } from "@ant-design/icons";
+import { Button, Card, Checkbox, Form, Input, message } from "antd";
+import md5 from "md5";
 import User from "models/user/user";
+import qs from "qs";
+import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useLocation, Link, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {
   deleteQueryParam,
+  redirectToUrl,
   setFieldErrorsFromServer,
 } from "utilities/generalUtility";
-import qs from "qs";
-import md5 from "md5";
 
 export default function Login() {
   const dispatch = useDispatch();
   const location = useLocation();
-  const navigate = useNavigate();
   const [form] = Form.useForm();
   const paramJson = qs.parse(location.search, { ignoreQueryPrefix: true });
 
@@ -29,15 +29,14 @@ export default function Login() {
   const onFinish = async (values) => {
     const encryptedPass = md5(values.password);
     try {
-      dispatch(User.loginCall(values.email, encryptedPass, values.remember));
-      const { from } = location.state || { from: { path: "/" } };
-      navigate.replace(from);
+      await dispatch(
+        User.loginCall(values.email, encryptedPass, values.remember)
+      );
+      redirectToUrl("/");
     } catch (error) {
       setFieldErrorsFromServer(error, form, values);
     }
   };
-
-  const onFinishFailed = (errorInfo) => {};
 
   return (
     <React.Fragment>
@@ -54,7 +53,6 @@ export default function Login() {
               remember: true,
             }}
             onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
             layout="vertical"
           >
             <Form.Item

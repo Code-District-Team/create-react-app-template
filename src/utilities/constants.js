@@ -6,20 +6,11 @@ const K = {
       BaseAPI: process.env.REACT_APP_BASE_API_URL,
       DomainName: process.env.REACT_APP_CLIENT_DOMAIN_NAME,
       Timeout: process.env.REACT_APP_TIMEOUT,
-      TenantURL: (domainPrefix = "") => {
-        return (
-          process.env.REACT_APP_PROTOCOL +
-          "://" +
-          domainPrefix +
-          process.env.REACT_APP_TENANT_PARTIAL_URL
-        );
-      },
+      Protocol: process.env.REACT_APP_PROTOCOL,
       Client: {
         BaseHost: process.env.REACT_APP_CLIENT_BASE_HOST,
         BasePort: process.env.REACT_APP_CLIENT_BASE_PORT,
       },
-
-      Protocol: process.env.REACT_APP_PROTOCOL,
 
       // Assignment
       LoginUser: "/auth/signin",
