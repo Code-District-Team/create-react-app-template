@@ -83,11 +83,11 @@ export default class User {
   }
 
   static isTokenAvailable() {
-    return this.getUserObjectFromCookies().api_token ? true : false;
+    return this.getUserObjectFromCookies().apiToken ? true : false;
   }
 
   static getToken() {
-    return this.getUserObjectFromCookies().api_token ?? "";
+    return this.getUserObjectFromCookies().apiToken ?? "";
   }
 
   static getName() {
