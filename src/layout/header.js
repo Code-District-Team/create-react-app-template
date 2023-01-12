@@ -6,11 +6,9 @@ import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
 } from "@ant-design/icons";
-import styles from "./layout.module.scss";
 import User from "models/user/user";
 
 export default function Header({ collapsed, toggle }) {
-  console.log(styles);
   const { Header } = Layout;
 
   const menu = (

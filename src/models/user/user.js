@@ -72,7 +72,6 @@ export default class User {
       : "{}";
     try {
       let utfBytes = bytes.toString(CryptoJS.enc.Utf8);
-      // console.log("asdasdasdasd", JSON.parse(utfBytes))
       return JSON.parse(utfBytes);
     } catch (error) {
       console.log("error", error);
@@ -85,7 +84,6 @@ export default class User {
   }
 
   static getTenant() {
-    console.log(this.getUserObjectFromCookies().tenant?.domainPrefix ?? null);
     return this.getUserObjectFromCookies().tenant?.domainPrefix ?? null;
   }
 

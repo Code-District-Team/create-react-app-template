@@ -9,7 +9,6 @@ export default function ForgotPassword() {
   const [form] = Form.useForm();
 
   const onFinish = async (values) => {
-    console.log("USer: ");
     try {
       await User.forgotPassword(values.email);
       message.success(`An email has been sent to ${values.email}`);

@@ -72,7 +72,6 @@ export const redirectToLogin = (error = "") => {
 
 export const redirectIfInvalidTenant = () => {
   const cookieDomainPrefix = User.getTenant();
-  console.log({ cookieDomainPrefix });
   const hostArray = window.location.hostname.split(".");
   const urlDomainPrefix = hostArray.length > 0 ? hostArray[0] : "";
   const path = window.location.pathname;
