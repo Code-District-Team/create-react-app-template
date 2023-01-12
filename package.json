@@ -27,6 +27,9 @@
     "source-map-loader": "^4.0.1",
     "web-vitals": "^3.0.4"
   },
+  "devDependencies": {
+    "prettier": "^2.8.1"
+  },
   "scripts": {
     "start-old": "react-scripts start",
     "start": "craco start",
@@ -34,13 +37,19 @@
     "build": "craco build",
     "test-old": "react-scripts test",
     "test": "craco test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prettify": "prettier --write \"src/**/*.{js,jsx}\""
   },
   "eslintConfig": {
     "extends": [
       "react-app",
       "react-app/jest"
     ]
+  },
+  "prettier": {
+    "singleQuote": false,
+    "tabWidth": 2,
+    "printWidth": 80
   },
   "browserslist": {
     "production": [

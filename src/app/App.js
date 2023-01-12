@@ -8,17 +8,15 @@ import ErrorBoundary from "common/components/errorBoundary/errorBoundary";
 function App() {
   return (
     <ErrorBoundary>
-      <div className="App">
-        <Routes>
-          {routes.map((route, i) => (
-            <Route
-              key={i}
-              path={route.path}
-              element={<RouteWithSubRoutes route={route} />}
-            />
-          ))}
-        </Routes>
-      </div>
+      <Routes>
+        {routes.map((route, i) => (
+          <Route
+            key={i}
+            path={route.path}
+            element={<RouteWithSubRoutes route={route} />}
+          />
+        ))}
+      </Routes>
     </ErrorBoundary>
   );
 }

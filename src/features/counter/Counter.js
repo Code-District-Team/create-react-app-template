@@ -8,8 +8,7 @@ import {
   selectCount,
 } from "./counterSlice";
 import styles from "./Counter.module.css";
-import { Button } from 'antd';
-
+import { Button } from "antd";
 
 export function Counter() {
   const count = useSelector(selectCount);
