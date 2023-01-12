@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import "./App.less";
 import routes from "routes/routes";
 import RouteWithSubRoutes from "routes/routeWithSubRoutes";
@@ -9,15 +9,15 @@ function App() {
   return (
     <ErrorBoundary>
       <div className="App">
-        <Switch>
+        <Routes>
           {routes.map((route, i) => (
-            <RouteWithSubRoutes
+            <Route
               key={i}
-              {...route}
-              exact={route.exact ?? false}
+              path={route.path}
+              element={<RouteWithSubRoutes route={route} />}
             />
           ))}
-        </Switch>
+        </Routes>
       </div>
     </ErrorBoundary>
   );

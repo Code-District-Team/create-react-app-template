@@ -1,33 +1,31 @@
-import React from "react";
-import { Form, Input, Button, Checkbox, Card } from "antd";
 import { LockOutlined } from "@ant-design/icons";
-import User from "../../models/user/user";
+import { Button, Card, Checkbox, Form, Input, message } from "antd";
+import React from "react";
 import { useDispatch } from "react-redux";
-import { useHistory, useLocation } from "react-router-dom";
-import { message } from 'antd';
-import { redirectToUrl } from '../../utilities/generalUtility'
-var md5 = require('md5');
+import { useLocation } from "react-router-dom";
+import User from "../../models/user/user";
+import { redirectToUrl } from "../../utilities/generalUtility";
+var md5 = require("md5");
 
 export default function SetPassword() {
   const dispatch = useDispatch();
-  const history = useHistory();
   const location = useLocation();
 
   const onFinish = async (values) => {
-    if(values.password !== values.confirmPassword){
-      message.error('Password does not match!')
-      return
+    if (values.password !== values.confirmPassword) {
+      message.error("Password does not match!");
+      return;
     }
     let token = location.search.substring(7);
     let encryptedPass = md5(values.password);
 
     try {
-      let user = await dispatch(User.resetPassword(encryptedPass, token, values.remember));
-      const { from } = location.state || { from: {path: '/'} };
-      redirectToUrl(user.tenant.domainPrefix, from.path)
-    } catch(error){
-
-    }
+      let user = await dispatch(
+        User.resetPassword(encryptedPass, token, values.remember)
+      );
+      const { from } = location.state || { from: { path: "/" } };
+      redirectToUrl(user.tenant.domainPrefix, from.path);
+    } catch (error) {}
   };
 
   const onFinishFailed = (errorInfo) => {};

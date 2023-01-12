@@ -1,15 +1,11 @@
-import { attr } from "redux-orm";
 import NetworkCall from "network/networkCall";
 import Request from "network/request";
 import K from "utilities/constants";
 import Cookies from "js-cookie";
 import CryptoJS from "crypto-js";
-import BaseModel from "models/baseModel/baseModel";
 import { redirectToLogin } from "utilities/generalUtility";
-import baseReducer from "models/baseModel/baseReducer";
-import { upsertModel } from "models/baseModel/baseActions";
 
-export default class User extends BaseModel {
+export default class User {
   // API call using thunk.
   static loginCall(email, password, remember) {
     return async (dispatch) => {
@@ -24,8 +20,8 @@ export default class User extends BaseModel {
         domain: "." + K.Network.URL.Client.BaseHost,
         expires: remember ? 365 : "",
       });
-
-      dispatch(upsertModel(User, user));
+      // TODO: Dispatch with your reducer
+      // dispatch(upsertModel(User, user));
       return user;
     };
   }
@@ -41,7 +37,6 @@ export default class User extends BaseModel {
   //Forgot password
   static async forgotPassword(email) {
     const user = await NetworkCall.fetch(Request.forgotPassword(email));
-    console.log("User: ", user);
     return user;
   }
 
@@ -61,7 +56,8 @@ export default class User extends BaseModel {
         expires: remember ? 365 : "",
       });
 
-      dispatch(upsertModel(User, user));
+      // TODO: Dispatch with your reducer
+      // dispatch(upsertModel(User, user));
       return user;
     };
   }
@@ -107,36 +103,4 @@ export default class User extends BaseModel {
   static roles() {
     return [K.Roles.User];
   }
-
-  // Reducer
-  static reducer(action, User, session) {
-    baseReducer(action, User, session);
-  }
 }
-
-User.modelName = "User";
-
-User.fields = {
-  // Attributes
-  id: attr(),
-  firstName: attr(),
-  lastName: attr(),
-  name: attr(),
-  email: attr(),
-  cellPhone: attr(),
-  officePhone: attr(),
-  employeeNumber: attr(),
-  fullTimeAvailabilityStartDate: attr(),
-  fullTimeAvailabilityEndDate: attr(),
-  targetUtilization: attr(),
-  billRate: attr(),
-  isCustomBillRate: attr(),
-  photoPath: attr(),
-  roleId: attr(),
-  locationId: attr(),
-  subscriptionId: attr(),
-  dob: attr(),
-  joiningDate: attr(),
-  prefix: attr(),
-  type: attr(),
-};
