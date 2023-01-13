@@ -28,7 +28,6 @@
     "web-vitals": "^3.0.4"
   },
   "devDependencies": {
-    "husky": "^8.0.0",
     "prettier": "^2.8.1"
   },
   "scripts": {
@@ -39,8 +38,7 @@
     "test-old": "react-scripts test",
     "test": "craco test",
     "eject": "react-scripts eject",
-    "prettify": "prettier --write \"src/**/*.{js,jsx}\"",
-    "prepare": "husky install"
+    "prettify": "prettier --write \"src/**/*.{js,jsx}\""
   },
   "eslintConfig": {
     "extends": [
