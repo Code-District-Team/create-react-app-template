@@ -8,7 +8,7 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.4.3",
-    "antd": "^4.24.5",
+    "antd": "^4.24.7",
     "axios": "^1.2.0",
     "craco-less": "^2.0.0",
     "crypto-js": "^4.1.1",
@@ -42,11 +42,6 @@
       "react-app",
       "react-app/jest"
     ]
-  },
-  "prettier": {
-    "singleQuote": false,
-    "tabWidth": 2,
-    "printWidth": 80
   },
   "browserslist": {
     "production": [

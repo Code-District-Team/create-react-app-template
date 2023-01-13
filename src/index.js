@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "antd/dist/antd.css";
+import "antd/dist/antd.min.css";
 import "antd/dist/antd.less";
 import "./styles.scss";
 import App from "./app/App";
