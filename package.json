@@ -3,13 +3,12 @@
   "version": "2.0.0",
   "private": true,
   "dependencies": {
-    "@ant-design/icons": "^5.0.0",
     "@craco/craco": "^7.0.0",
     "@reduxjs/toolkit": "^1.9.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.4.3",
-    "antd": "^5.1.4",
+    "antd": "^4.24.7",
     "axios": "^1.2.0",
     "craco-less": "^2.0.0",
     "crypto-js": "^4.1.1",
@@ -17,7 +16,6 @@
     "js-cookie": "^3.0.1",
     "less-loader": "^11.1.0",
     "md5": "^2.3.0",
-    "moment": "^2.29.4",
     "node-sass": "^8.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -47,11 +45,6 @@
       "react-app",
       "react-app/jest"
     ]
-  },
-  "prettier": {
-    "singleQuote": false,
-    "tabWidth": 2,
-    "printWidth": 80
   },
   "browserslist": {
     "production": [

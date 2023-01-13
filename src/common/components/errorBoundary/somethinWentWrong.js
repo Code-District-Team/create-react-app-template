@@ -1,27 +1,17 @@
+import { HomeOutlined } from "@ant-design/icons";
 import { Button, Result } from "antd";
-import React from "react";
-import { useNavigate } from "react-router-dom";
 
-const SomethingWentWrong = () => {
-  const navigate = useNavigate();
-
+export default function SomethingWentWrong() {
   return (
     <Result
       status="500"
-      title=""
+      title="500"
       subTitle="Sorry, something went wrong."
       extra={
-        <Button
-          type="primary"
-          onClick={() => {
-            navigate(-1);
-          }}
-        >
+        <Button icon={<HomeOutlined />} type="primary" href="/">
           Back Home
         </Button>
       }
     />
   );
-};
-
-export default SomethingWentWrong;
+}
