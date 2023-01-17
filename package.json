@@ -37,12 +37,6 @@
     "eject": "react-scripts eject",
     "prettify": "prettier --write \"src/**/*.{js,jsx}\""
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
   "browserslist": {
     "production": [
       ">0.2%",
