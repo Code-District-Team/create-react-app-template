@@ -1,6 +1,7 @@
 {
   "rules": {
     // add eslint rules here
+    "no-var": "error",
     "no-unused-vars": "warn"
   },
   "extends": ["react-app", "react-app/jest"]
