@@ -6,3 +6,8 @@
   },
   "extends": ["react-app", "react-app/jest"]
 }
+
+/**
+ * eslint rules guide
+ * https://eslint.org/docs/latest/rules/
+ */
