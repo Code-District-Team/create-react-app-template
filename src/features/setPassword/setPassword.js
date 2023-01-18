@@ -1,11 +1,11 @@
 import { LockOutlined } from "@ant-design/icons";
 import { Button, Card, Checkbox, Form, Input, message } from "antd";
+import md5 from "md5";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 import User from "../../models/user/user";
 import { redirectToUrl } from "../../utilities/generalUtility";
-var md5 = require("md5");
 
 export default function SetPassword() {
   const dispatch = useDispatch();
@@ -16,11 +16,11 @@ export default function SetPassword() {
       message.error("Password does not match!");
       return;
     }
-    let token = location.search.substring(7);
-    let encryptedPass = md5(values.password);
+    const token = location.search.substring(7);
+    const encryptedPass = md5(values.password);
 
     try {
-      let user = await dispatch(
+      const user = await dispatch(
         User.resetPassword(encryptedPass, token, values.remember)
       );
       const { from } = location.state || { from: { path: "/" } };
