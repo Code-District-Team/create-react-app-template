@@ -20,4 +20,4 @@ module.exports = {
 };
 
 // modifyVars color variable guide
-//https://github.com/ant-design/ant-design/blob/master/components/style/themes/default.less
+// https://github.com/ant-design/ant-design/blob/4.x-stable/components/style/themes/default.less
