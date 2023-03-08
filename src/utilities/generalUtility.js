@@ -26,7 +26,7 @@ export const hasOnlyDigits = (string) => {
 
 export const getColor = (value) => {
   //value from 0 to 1
-  var hue = ((1 - value) * 120).toString(10);
+  const hue = ((1 - value) * 120).toString(10);
   return ["hsl(", hue, ",65%,70%)"].join("");
 };
 
